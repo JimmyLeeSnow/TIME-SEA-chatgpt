@@ -1,5 +1,4 @@
 server:
-  #   SSL证书
   ssl:
     key-store: classpath:anchwngb.cn.pfx
     key-store-password: g15xrx4u57
@@ -62,11 +61,11 @@ ali-oss:
 # GPT 对话助手配置
 gpt:
   # 开发者名称
-  author: '时间海'
+  author: '佑云'
   # BOT 中文名
-  botNameChinese: '时间海'
+  botNameChinese: '佑云天'
   # BOT 英文名
-  botNameEnglish: 'TIME SEA'
+  botNameEnglish: 'WOO CLOUD'
   # 免费GPT配置
   free:
     # claude 配置
@@ -106,11 +105,11 @@ config:
   # 用户第一次登录奖励次数
   incentiveFrequency: 10
   # 观看视频奖励次数
-  videoFrequency: 1
+  videoFrequency: 5
   # SD图生图消耗次数
   sdImage2Frequency: 5
   # GPT文生图消耗次数
-  gptTextImageFrequency: 5
+  gptTextImageFrequency: 2
   # SD文生图消耗次数
   sdTextImageFrequency: 5
   # MJ文生图消耗次数
@@ -118,8 +117,8 @@ config:
   # MJ图生图消耗次数
   mjImage2Frequency: 5
   #GPT消耗次数
-  gptFrequency: 1
+  gptFrequency: 2
   # 观看视频奖励次数
-  signInFrequency: 1
+  signInFrequency: 5
 
 

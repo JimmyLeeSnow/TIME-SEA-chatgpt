@@ -10,7 +10,7 @@ sa-token:
 
 spring:
   codec:
-    max-in-memory-size: 1048576
+    max-in-memory-size: 1048576000
   servlet:
     multipart:
       max-file-size: 10240MB
