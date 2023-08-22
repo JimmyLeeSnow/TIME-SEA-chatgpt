@@ -33,6 +33,12 @@ public class DrawingSdImage2TaskDto {
     @NotBlank(message = "模型名称不能为空")
     private String modelName;
 
+    @NotBlank(message = "采样率不能为空")
+    private String rate;
+
+    @NotNull(message = "迭代步数不能为空")
+    private Integer steps;
+
     private String negative_prompt;
 
     public static PictureSdDrawingModel convertToPictureImgModel(DrawingSdImage2TaskDto item) {
@@ -44,6 +50,8 @@ public class DrawingSdImage2TaskDto {
         result.setWidth(item.getWidth());
         result.setNegative_prompt(item.negative_prompt);
         result.setHeight(item.getHeight());
+        result.setRate(item.getRate());
+        result.setSteps(item.getSteps());
         result.setOverride_settings(new PictureSdDrawingModel.Override().setSd_model_checkpoint(item.modelName));
         return result;
     }

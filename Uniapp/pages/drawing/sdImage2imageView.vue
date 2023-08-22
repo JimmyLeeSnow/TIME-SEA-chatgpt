@@ -1,7 +1,7 @@
 <template>
   <view class="container">
-    <loading-component ref="loadingRef" :msg="msg" :degree="0.8"/>
-    <generate-loading-component ref="generateLoadingRef" :location="location"/>
+    <loading-component ref="loadingRef" :msg="msg" :degree="0.8" />
+    <generate-loading-component ref="generateLoadingRef" :location="location" />
     <scroll-view class="main-scroll" scroll-y>
       <!--  上传文件框框-->
       <view class="title">
@@ -11,7 +11,7 @@
         <view class="uploader_container">
           <view v-if="!form.images">
             <van-uploader @after-read="imageCacheCallback" use-before-read :deletable="false" @before-read="beforeRead">
-              <van-icon name="plus" size="60rpx" color="#868585"/>
+              <van-icon name="plus" size="60rpx" color="#868585" />
             </van-uploader>
             <view class="uploader_subassembly">
               <view class="uploader_prompt">
@@ -26,8 +26,7 @@
             </view>
           </view>
           <view v-else>
-            <image :src="form.images" class="preview_image"
-                   @click="previewImage(form.images)"/>
+            <image :src="form.images" class="preview_image" @click="previewImage(form.images)" />
             <view class="preview_model">
               <van-uploader @after-read="imageCacheCallback" :deletable="false">
                 <button class="preview_choose">重新选择
@@ -41,40 +40,62 @@
       <!--  描述词-->
       <view class="title">
         <view>正向提示词(必填)</view>
-        <textarea :show-confirm-bar="false" :auto-height="true" maxlength="2000" confirm-type="done"
-                  v-model="form.prompt"
-                  placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇">
+        <textarea :show-confirm-bar="false" :auto-height="true" maxlength="2000" confirm-type="done" v-model="form.prompt"
+          placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇">
 
-      </textarea>
+    </textarea>
       </view>
       <!--  描述词-->
       <view class="title">
         <view>反向提示词(可选)</view>
         <textarea :show-confirm-bar="false" :auto-height="true" maxlength="2000" confirm-type="done"
-                  v-model="form.negative_prompt"
-                  placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇">
+          v-model="form.negative_prompt" placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇">
 
-      </textarea>
+    </textarea>
       </view>
       <!--  参数配置-->
       <view class="title">
         <view>图片大小</view>
-        <view style="display: flex;flex-wrap: wrap;padding-top: 30rpx">
-          <view :class="item.isSelected?'model_choose_selected':'model_choose'" v-for="(item,index) in size"
-                :key="index"
-                @click="handleSize(index)">
+        <scroll-view class="scroll-x" :scroll-with-animation="true" :scroll-bar="false" enable-flex scroll-x>
+          <view :class="item.isSelected ? 'model_choose_selected' : 'model_choose'" v-for="(item, index) in size" :key="index"
+            @click="handleSize(index)">
             {{ item.text }}
           </view>
-        </view>
+        </scroll-view>
+      </view>
+      <view class="title">
+        <view>采样率</view>
+        <scroll-view class="scroll-x" :scroll-with-animation="true" :scroll-bar="false" enable-flex scroll-x>
+          <view :class="item.isSelected ? 'model_choose_selected' : 'model_choose'" v-for="(item, index) in sampling"
+            :key="index" @click="handleSampling(index)">
+            {{ item.text }}
+          </view>
+        </scroll-view>
+      </view>
+      <view class="title">
+        <view>迭代步数</view>
+        <scroll-view class="scroll-x" :scroll-with-animation="true" :scroll-bar="false" enable-flex scroll-x>
+          <view :class="item.isSelected ? 'model_choose_selected' : 'model_choose'" v-for="(item, index) in iteration"
+            :key="index" @click="handleIteration(index)">
+            {{ item.text }}
+          </view>
+        </scroll-view>
       </view>
       <view class="title">
         <view>模型选择</view>
-        <view style="display: flex;flex-wrap: wrap;padding-top: 30rpx">
-          <view :class="item.isSelected?'model_choose_selected':'model_choose'" v-for="(item,index) in model"
-                :key="index" @click="handleModel(index)">
-            {{ item.text }}
+        <scroll-view class="scroll-mx-x" :scroll-with-animation="true" :scroll-bar="false" enable-flex scroll-x>
+          <view class="item-rows">
+            <view class="item-row" v-for="(_, rowIndex) in Array(Math.ceil(model.length / 3))" :key="rowIndex">
+              <view v-for="(_, colIndex) in Array(3)" :key="colIndex">
+                <view v-if="model[rowIndex * 3 + colIndex]"
+                  :class="model[rowIndex * 3 + colIndex].isSelected ? 'model_choose_selected' : 'model_choose'"
+                  @click="handleModel(rowIndex * 3 + colIndex)">
+                  {{ model[rowIndex * 3 + colIndex].text }}
+                </view>
+              </view>
+            </view>
           </view>
-        </view>
+        </scroll-view>
       </view>
     </scroll-view>
     <view class="levitation">
@@ -86,12 +107,20 @@
 <script>
 import GenerateLoadingComponent from "@/pages/drawing/components/generateLoadingComponent.vue";
 import LoadingComponent from "@/wxcomponents/components/loadingComponent.vue";
-import {isDrawingSucceed, sdConnectivity} from "@/api/drawing";
+import {
+  isDrawingSucceed,
+  sdConnectivity
+} from "@/api/drawing";
 import env from "@/utils/env";
-import {getToken} from "@/utils/utils";
+import {
+  getToken
+} from "@/utils/utils";
 
 export default {
-  components: {LoadingComponent, GenerateLoadingComponent},
+  components: {
+    LoadingComponent,
+    GenerateLoadingComponent
+  },
   data() {
     return {
       form: {
@@ -101,28 +130,90 @@ export default {
         height: 512,
         seed: 0,
         restore_faces: 0,
+        rate: '',
+        steps: 0,
         modelName: '',
         location: 0,
         negative_prompt: ''
       },
       msg: '正在检查绘图服务运行状态',
       //图片大小
-      size: [
-        {
-          width: 512,
-          height: 512,
-          isSelected: true,
-          text: "标准分辨率"
-        },
-        {
-          width: 1024,
-          height: 1024,
-          isSelected: false,
-          text: "高分辨率"
-        }
+      size: [{
+        width: 512,
+        height: 896,
+        isSelected: true,
+        text: "竖图(512*869)"
+      },
+      {
+        width: 896,
+        height: 512,
+        isSelected: false,
+        text: "横图(896*512)"
+      },
+      {
+        width: 512,
+        height: 512,
+        isSelected: false,
+        text: "标准"
+      },
+      {
+        width: 1024,
+        height: 1024,
+        isSelected: true,
+        text: "高清"
+      }
       ],
       //模型
-      model: []
+      model: [],
+      //采样率
+      sampling: [{
+        rate: "Euler a",
+        isSelected: false,
+        text: "Euler a"
+      },
+      {
+        rate: "DPM++ SDE Karras",
+        isSelected: false,
+        text: "SDE Karras"
+      },
+      {
+        rate: "DPM++ 2S a Karras",
+        isSelected: false,
+        text: "2S a Karras"
+      },
+      {
+        rate: "DPM++ 2M Karras",
+        isSelected: false,
+        text: "2M Karras"
+      }
+      ],
+      //迭代步数
+      iteration: [{
+        steps: 20,
+        isSelected: false,
+        text: "20"
+      },
+      {
+        steps: 30,
+        isSelected: false,
+        text: "30"
+      },
+      {
+        steps: 40,
+        isSelected: false,
+        text: "40"
+      },
+      {
+        steps: 50,
+        isSelected: false,
+        text: "50"
+      },
+      {
+        steps: 60,
+        isSelected: false,
+        text: "60"
+      }
+      ]
     };
   },
   created() {
@@ -135,6 +226,24 @@ export default {
   },
   methods: {
     /**
+     * 处理采样率
+     * @param index
+     */
+    handleSampling: function (index) {
+      this.sampling.forEach(s => s.isSelected = false)
+      this.sampling[index].isSelected = true
+      this.form.rate = this.sampling[index].rate
+    },
+    /**
+     * 处理迭代步数
+     * @param index
+     */
+    handleIteration: function (index) {
+      this.iteration.forEach(s => s.isSelected = false)
+      this.iteration[index].isSelected = true
+      this.form.steps = this.iteration[index].steps
+    },
+    /**
      * 处理模型
      * @param index
      */
@@ -144,7 +253,10 @@ export default {
       this.form.modelName = this.model[index].modelName
     },
     beforeRead: function (e) {
-      const {file, callback} = e.detail;
+      const {
+        file,
+        callback
+      } = e.detail;
       try {
         if (file.size > 2 * 1024 * 1024) { // 判断图片大小是否超过2MB
           uni.showToast({
@@ -236,7 +348,10 @@ export default {
      * 提交
      */
     submit: async function () {
-      const {images, prompt} = this.form;
+      const {
+        images,
+        prompt
+      } = this.form;
       if (!images) {
         uni.showToast({
           title: '请上传参考图',
@@ -279,6 +394,8 @@ export default {
                 'height': _this.form.height,
                 'seed': _this.form.seed,
                 'restore_faces': _this.form.restore_faces,
+                'rate': _this.form.rate,
+                'steps': _this.form.steps,
                 "modelName": _this.form.modelName,
                 "negative_prompt": _this.form.negative_prompt
               },
@@ -337,18 +454,18 @@ export default {
       this.size[index].isSelected = true
       this.form.height = this.size[index].height
       this.form.width = this.size[index].width
-    }
-    ,
+    },
 
     /**
      * 解析用户选择的图片
      * @param e
      */
     imageCacheCallback: function (e) {
-      const {file} = e.detail;
+      const {
+        file
+      } = e.detail;
       this.form.images = file.url
-    }
-    ,
+    },
     /**
      * 预览图片
      * @param url
@@ -375,7 +492,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .container {
   animation: fadeIn 0.5s ease-in-out forwards;
   padding: 20rpx;
@@ -391,30 +507,43 @@ export default {
   font-size: 28rpx
 }
 
-.model_choose {
+.model_choose,
+.model_choose_selected {
   font-size: 25rpx;
-  background-color: rgb(138, 117, 255);
-  flex-shrink: 0;
   border-radius: 10rpx;
-  padding: 10rpx 30rpx;
-  margin-bottom: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  height: 60rpx;
   margin-right: 20rpx;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+}
+
+.model_choose {
+  background-color: rgb(138, 117, 255);
 }
 
 .model_choose_selected {
-  font-size: 25rpx;
   background-color: rgb(92, 72, 204);
-  flex-shrink: 0;
-  border-radius: 10rpx;
-  padding: 10rpx 30rpx;
-  margin-bottom: 20rpx;
-  margin-right: 20rpx;
+}
+
+.scroll-mx-x {
   display: flex;
-  justify-content: center;
-  align-items: center
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 20rpx;
+}
+
+.item-rows {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.item-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20rpx;
 }
 
 .preview_model {
@@ -505,6 +634,4 @@ textarea {
   height: 240rpx;
   border-radius: 20rpx
 }
-
-
 </style>

@@ -33,6 +33,9 @@ public class PictureSdDrawingModel implements Serializable {
 
     private Override override_settings;
 
+    private Integer steps;
+
+    private String rate;
 
     @Data
     public static class Override implements Serializable {
