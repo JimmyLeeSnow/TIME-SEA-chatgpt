@@ -9,10 +9,10 @@
                 {{item.icon}}
               </div>
               <div >
-                <div style="font-weight: 700;font-size: 16px;color: #ffffff;padding-top: 10px">
+                <div style="font-weight: 700;font-size: 16px;color: #515151;padding-top: 10px">
                   {{ item.title }}
                 </div>
-                <div style="padding-top: 20px;font-size: 7px;color: #878787; display: -webkit-box;
+                <div style="padding-top: 20px;font-size: 7px;color: #aeaeae; display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -73,7 +73,7 @@ export default {
   padding: 0 20px 120px;
   display: flex;
   overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 @keyframes explainAnimation {
@@ -115,7 +115,7 @@ export default {
 .item {
   height: 150px;
   width: 210px;
-  background-color: rgb(27,30,32);
+  background-color: white;
   margin-bottom: 15px;
   border-radius: 8px;
   font-size: 15px;
@@ -125,7 +125,7 @@ export default {
 }
 
 .item:hover {
-  background-color: rgb(62, 61, 61);
+  background-color: #e6e6e6;
   cursor: pointer;
   transition: background-color .2s;
 }

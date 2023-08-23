@@ -122,7 +122,7 @@ export default defineComponent({
             }
             ElNotification({
               title: '登录成功',
-              message: '欢迎使用TIME SEA PLUS',
+              message: '欢迎使用WOO CLOUD PLUS',
               type: 'success',
             })
             location.reload();
@@ -191,7 +191,7 @@ export default defineComponent({
   overflow: hidden;
   width: 100%;
   padding: 0;
-  background-color: rgb(27,30,32)
+  background-color: white;
 }
 
 .cover-div {
@@ -220,17 +220,12 @@ export default defineComponent({
 }
 
 .head_img {
-  background-image: linear-gradient(to top, rgb(27,30,32) 30%, transparent 100%), url("../assets/login-header.png");
+  background-image: linear-gradient(to top, rgb(205, 207, 208) 30%, transparent 100%), url("../assets/login-header.png");
   background-size: cover;
   background-position: center;
   height: 100px;
-  box-shadow: 0px -10px 20px rgba(27,30,32, 0.2);
+  box-shadow: 0px -10px 20px rgba(205, 207, 208, 0.2);
 }
-
-.login-dialog {
-
-}
-
 
 .form {
   position: relative;
@@ -336,7 +331,7 @@ export default defineComponent({
   text-align: center;
   font-weight: 550;
   padding-bottom: 10px;
-  color: #bababa;
+  color: #303030;
 }
 
 .qc_code {

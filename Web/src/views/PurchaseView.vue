@@ -32,7 +32,7 @@
           </el-col>
         </el-row>
       </div>
-      <el-dialog v-model="payVisible" width="30%" v-if="productFrequency" style="background-color: rgb(27,30,32)">
+      <el-dialog v-model="payVisible" width="30%" v-if="productFrequency" style="background-color: white;">
         <div class="pay-title">
           选择支付方式后点击“跳转至收银台”打开支付页面支付
         </div>
@@ -250,7 +250,6 @@ export default {
   overflow: auto;
   overflow-y: scroll;
   height: 100%;
-  background-color: #23282A;
 }
 
 .alipay-img {
@@ -270,7 +269,7 @@ export default {
 .wrapper-title {
   background-color: #7d80ff;
   border-radius: 10px 10px 0 0;
-  color: white;
+  color: black;
   padding-top: 20px;
   padding-bottom: 20px;
   font-size: 15px;
@@ -293,7 +292,6 @@ export default {
   margin: 0;
   font-size: 26px;
   font-weight: 600;
-  color: #e9e9e9;
 }
 
 .wrapper {
@@ -305,7 +303,7 @@ export default {
 
 .item {
   text-align: center;
-  background-color: rgb(27,30,32);
+  background-color: white;
   cursor: pointer;
   width: 100%;
   height: 400px;
@@ -318,7 +316,6 @@ export default {
 .introduce {
   font-size: 14px;
   margin-top: 12px;
-  color: #838383;
 }
 
 .card-introduce {
@@ -338,7 +335,7 @@ export default {
 
 .quantity {
   padding-top: 50px;
-  color: white;
+  color: #303030;
   font-size: 38px;
   font-weight: 500;
 }

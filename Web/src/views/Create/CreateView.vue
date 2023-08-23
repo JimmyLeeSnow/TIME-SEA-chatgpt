@@ -62,7 +62,7 @@ export default {
   padding: 0 20px 120px;
   display: flex;
   overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 @keyframes explainAnimation {
@@ -92,7 +92,7 @@ export default {
 }
 
 .title {
-  color: white;
+  color: black;
   font-size: 20px;
   font-weight: 500;
 }
@@ -103,7 +103,7 @@ export default {
 }
 
 .item {
-  background-color: rgb(27,30,32);
+  background-color: rgb(255,255,255);
   width: 100%;
   height: 80px;
   border-radius: 8px;
@@ -111,12 +111,12 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 15px;
-  color: #ffffff;
+  color: rgb(48, 48, 48);
   margin-bottom: 20px;
 }
 
 .item:hover {
-  background-color: #5a5a5a;
+  background-color: #e6e6e6;
   cursor: pointer;
   transition: background-color .2s;
 }

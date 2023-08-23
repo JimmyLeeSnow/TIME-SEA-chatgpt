@@ -1,7 +1,7 @@
 <template>
   <NavigationBar />
   <LeftNavigationBar />
-  <el-dialog class="announcement" v-model="dialogVisible"  center align-center width="380px" style="background-color: rgb(27,30,32)">
+  <el-dialog class="announcement" v-model="dialogVisible"  center align-center width="380px" style="background-color: white)">
     <span style="text-align: center">{{ context }}</span>
     <template #footer>
       <span class="dialog-footer">
@@ -100,8 +100,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  /*background: #f6f6f6;*/
-  background: #1D2022FF;
+  background: #f6f6f6;
+  /*background: #fffFF;*/
   color: #303030;
   width: 100%;
   height: 100%;

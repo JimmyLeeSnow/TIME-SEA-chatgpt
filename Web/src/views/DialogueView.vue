@@ -2,7 +2,7 @@
   <div class="body" ref="scrollRef">
     <div v-if="!conversationList.length" class="explain">
       <img class="logo" alt="Vue logo" src="../assets/logo02.svg">
-      <div class="expositoryCase">欢迎使用TIME SEA PLUS</div>
+      <div class="expositoryCase">欢迎使用WOO CLOUD PLUS</div>
       <div class="consume">
         <el-icon>
           <Goods/>
@@ -112,7 +112,7 @@
         <img alt="Vue logo" src="../assets/logo02.svg" class="cache-img">
       </div>
       <div class="cache-text">
-        TIME SEA PLUS
+        WOO CLOUD PLUS
       </div>
       <div class="cache-flex-center cache-padding-top">
         <div class="cache-btn" @click="createdNewChat">
@@ -536,7 +536,7 @@ export default {
   padding: 0 20px 120px;
   display: flex;
   overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 .footer {
@@ -544,7 +544,7 @@ export default {
   box-sizing: border-box;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(rgba(246, 246, 246, 0), #282c2e 25%);
+  background: linear-gradient(rgba(246, 246, 246, 0), #f6f6f6 25%);
   flex-shrink: 0;
   padding: 30px 20px;
   display: flex;
@@ -561,7 +561,7 @@ export default {
   max-width: 800px;
   width: 100%;
   pointer-events: auto;
-  background: #1d2022;
+  background: #fff;
   border-radius: 8px;
   box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
   display: flex;
@@ -591,7 +591,7 @@ export default {
   min-height: 60px;
   resize: none;
   -webkit-appearance: none;
-  background: #1d2022 0 0;
+  background: #fff 0 0;
   border: 0;
   flex: 1;
   margin: 0;
@@ -626,7 +626,7 @@ export default {
   height: 62px;
   padding: 0 20px;
 
-  background-color: #1d2022;
+  background-color: #fff;
 }
 
 .sendIcon {
@@ -704,8 +704,8 @@ export default {
 
 ::v-deep( .vuepress-markdown-body) {
   padding: 0 0 0 16px;
-  color: #ffffff;
-  background-color: #1f2224;
+  color: #1f2224;
+  background-color: #ffffff;
 }
 
 
@@ -718,8 +718,8 @@ export default {
 
 .op-btn {
   box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
-  color: #c8c8c8;
-  background-color: #1d2022;
+  color: #6b6b6b;
+  background-color: #fff;
   margin-right: 5px;
   padding: 3px 10px;
   display: flex;
@@ -740,7 +740,7 @@ export default {
   flex-direction: column;
   align-items: center;
   animation: explainAnimation 0.3s;
-  color: white;
+  /*color: white;*/
 }
 
 @keyframes explainAnimation {
@@ -760,22 +760,22 @@ export default {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  box-shadow: 0 5px 7px rgba(29,32,34, 0.29);
-  background-color: rgb(29,32,34);
+  box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
+  background-color: white;
   padding: 5px 20px;
   font-size: 13px;
-  color: #d8d8d8;
+  color: #636363;
   border-radius: 5px
 }
 
 
 .answer-data {
-  box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
+  box-shadow: 0 5px 7px rgb(255 255 255 / 6%);
   margin-left: 10px;
   border-radius: 5px;
   margin-top: 2px;
   overflow-x: hidden;
-  background-color: #1f2224;
+  background-color: #fff;
   padding: 10px 10px 10px 5px;
   min-width: 50px;
 }
@@ -810,7 +810,7 @@ export default {
 
 .beCareful {
   padding: 40px 6px 12px;
-  color: rgb(185, 175, 149);
+  color: #848484;
   font-size: 15px;
   line-height: 1.6;
 }
@@ -900,8 +900,8 @@ export default {
   border-radius: 5px;
   padding: 3px 10px;
   box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
-  color: #c8c8c8;
-  background-color: #1d2022;
+  color: #6b6b6b;
+  background-color: #fff;
 }
 
 .clear2 {
@@ -911,8 +911,8 @@ export default {
   top: 0;
   z-index: 1;
   font-size: 8px;
-  color: #c8c8c8;
-  background-color: #1d2022;
+  color: #6b6b6b;
+  background-color: #fff;
   border-radius: 5px;
   padding: 3px 10px;
   margin-left: 92px;

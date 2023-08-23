@@ -123,7 +123,7 @@ export default {
 	padding: 0 20px 100px;
 	display: flex;
 	overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 @keyframes explainAnimation {
@@ -149,7 +149,7 @@ export default {
 	font-size: 18px;
 	font-weight: bold;
 	line-height: 1.4;
-	color: #ffffff;
+	color: black;
 	margin-bottom: 15px;
 	display: block;
 }
@@ -166,36 +166,36 @@ export default {
 .illustrate {
 	display: block;
 	margin: 10px 0;
-	color: #ffffff;
+	color: black;
 	font-size: 13px;
 }
 
->>>.inputBox>.el-input__wrapper {
+>>> .inputBox > .el-input__wrapper {
 	box-shadow: none;
 	width: 100%;
 	height: 40px;
 	border-radius: 8px;
-	background-color: rgb(27,30,32);
+	background-color: white;
 	color: white;
 	font-size: 15px;
 	box-sizing: border-box;
 	padding: 0 15px;
 	outline: none;
 	margin-bottom: 10px;
-}
+  }
 
->>>.textareaBox>.el-textarea__inner {
+>>> .textareaBox > .el-textarea__inner {
 	width: 100%;
 	border-radius: 7.5px;
-  background-color: rgb(27,30,32);
-	color: #ffffff;
+	background-color: white;
+	color: black;
 	font-size: 15px;
 	outline: none;
 	margin-bottom: 20px;
 	box-shadow: none;
 	box-sizing: border-box;
 	padding: 15px;
-}
+  }
 
 .determineTheBuild {
 	font-size: 15px;
@@ -219,8 +219,8 @@ export default {
 
 .determineTheBuildBack {
 	font-size: 15px;
-	background-color: #000000;
-	color: #ffffff;
+	background-color: white;
+	color: #303030;
 	border-radius: 100px;
 	height: 40px;
 	width: 300px;
@@ -233,7 +233,7 @@ export default {
 }
 
 .determineTheBuildBack:hover {
-	background: #535353;
+	background: #f0f0f0;
 }
 
 @media only screen and (max-width: 767px) {

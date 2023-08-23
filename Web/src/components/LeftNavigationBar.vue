@@ -20,7 +20,7 @@
 			<div class="bottom">
 				<el-avatar :size="40" :icon="UserFilled" :src="require('../assets/logoHead.svg')" />
 				<div class="bottomRight">
-					<div class="bottomRightName">TIME SEA PLUS</div>
+					<div class="bottomRightName">WOO CLOUD PLUS</div>
 					<div class="bottomRightEdition">v1.2.5</div>
 				</div>
 			</div>
@@ -143,7 +143,7 @@ export default defineComponent({
 	width: 100%;
 	height: 100%;
 	display: flex;
-	border: 1px solid #535353;
+	border: 1px solid #e8e8e8;
 	border-radius: 10px;
 	overflow: hidden;
 }
@@ -151,8 +151,8 @@ export default defineComponent({
 .leftNavigation {
 	width: 260px;
 	height: 100%;
-	background-color: #1d2022;
-	border-right: 1px solid #535353;
+	background-color: #fff;
+	border-right: 1px solid #e8e8e8;
 	position: relative;
 }
 
@@ -162,7 +162,7 @@ export default defineComponent({
 	bottom: 0;
 	width: 100%;
 	height: 70px;
-	border-top: 1px solid #535353;
+	border-top: 1px solid #e8e8e8;
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -177,7 +177,6 @@ export default defineComponent({
 }
 
 .bottomRightName {
-  color: #848484;
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -240,9 +239,8 @@ export default defineComponent({
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	color: #ffffff;
+	color: #303030;
 	font-size: 15px;
-  background-color: #1d2022;
 }
 
 .switch-item-title {
@@ -250,7 +248,7 @@ export default defineComponent({
 }
 
 .switch-active {
-	background-color: #262a2c;
+	background-color: #f6f6f6;
 	border-radius: 8px
 }
 

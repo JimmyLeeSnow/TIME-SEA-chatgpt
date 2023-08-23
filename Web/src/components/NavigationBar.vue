@@ -49,7 +49,7 @@
     <div v-else @click="dialogVisible = true" class="login">登录</div>
 	</nav>
 
-	<el-dialog v-model="appletDialogVisible" title="TIME SEA PLUS" width="300" center align-center>
+	<el-dialog v-model="appletDialogVisible" title="WOO CLOUD PLUS" width="300" center align-center>
 		<div class="wxAppletCodeRow">
 			<img class="wxAppletCode" :src="require('../assets/wxAppletCode.jpg')">
 			<div>微信扫一扫</div>
@@ -189,7 +189,7 @@ export default defineComponent({
 	height: 60px;
 	box-sizing: border-box;
 	width: 100%;
-	border-bottom: 1px solid #535353;
+	border-bottom: 1px solid #e8e8e8;
 	flex-shrink: 0;
 	justify-content: space-between;
 	align-items: center;
@@ -213,10 +213,9 @@ export default defineComponent({
 }
 
 .switch-button {
-  color: white;
 	box-sizing: border-box;
 	height: 34px;
-	background: #35393c;
+	background: #e6e6e6;
 	border-radius: 7px;
 	align-items: center;
 	padding: 0 2px;
@@ -232,14 +231,14 @@ export default defineComponent({
 	font-size: 14px;
 	font-weight: 500;
 	display: flex;
-	color: #ffffff;
+	color: #303030;
 	text-decoration: none;
 	box-sizing: border-box;
 	padding: 0 16px;
 }
 
 .switch-active {
-	background: #1d2022 ;
+	background: #fff ;
 }
 
 .header-side {
@@ -389,7 +388,6 @@ export default defineComponent({
   margin-left: 8px;
   font-size: 15px;
   overflow: hidden;
-  color: #c5c5c5;
 }
 .header-user-btn:hover {
   background: rgb(48,49,51);

@@ -381,7 +381,7 @@ export default {
   padding: 0 20px 120px;
   display: flex;
   overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 .footer {
@@ -389,7 +389,7 @@ export default {
   box-sizing: border-box;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(rgba(246, 246, 246, 0), #282c2e 25%);
+  background: linear-gradient(rgba(246, 246, 246, 0), #f6f6f6 25%);
   flex-shrink: 0;
   padding: 30px 20px;
   display: flex;
@@ -406,7 +406,7 @@ export default {
   max-width: 800px;
   width: 100%;
   pointer-events: auto;
-  background: #1d2022;
+  background: #fff;
   border-radius: 8px;
   box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
   display: flex;
@@ -432,7 +432,7 @@ export default {
   min-height: 60px;
   resize: none;
   -webkit-appearance: none;
-  background: #1d2022 0 0;
+  background: #fff 0 0;
   border: 0;
   flex: 1;
   margin: 0;
@@ -490,7 +490,7 @@ export default {
 
 .questions > .item {
   box-sizing: border-box;
-  background-color: #1f2224;
+  background-color: #ffffff;
   /*border: 1px solid #ececec;*/
   border-radius: 8px;
   flex-direction: column;
@@ -525,12 +525,12 @@ export default {
   font-size: 16px;
   line-height: 28px;
   position: relative;
-  color: white;
+  color: black;
 }
 ::v-deep( .vuepress-markdown-body) {
   padding: 0 0 0 16px;
-  color: #ffffff;
-  background-color: #1f2224;
+  color: #1f2224;
+  background-color: #ffffff;
 }
 
 
@@ -540,7 +540,7 @@ export default {
   flex-direction: column;
   align-items: center;
   animation: explainAnimation 0.3s;
-  color: white;
+  /*color: white;*/
 }
 
 @keyframes explainAnimation {
@@ -560,11 +560,11 @@ export default {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  box-shadow: 0 5px 7px rgba(29,32,34, 0.29);
-  background-color: rgb(29,32,34);
+  box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
+  background-color: white;
   padding: 5px 20px;
   font-size: 13px;
-  color: #d8d8d8;
+  color: #636363;
   border-radius: 5px
 }
 
@@ -603,7 +603,7 @@ export default {
 
 .beCareful {
   padding: 40px 6px 12px;
-  color: rgb(185, 175, 149);
+  color: #848484;
   font-size: 15px;
   line-height: 1.6;
 }
@@ -651,10 +651,10 @@ export default {
   margin-right: 5px;
   display: flex;
   align-items: center;
-  background-color: #000000;
+  background-color: whitesmoke;
   border-radius: 100px;
   font-size: 13px;
-  color: white;
+  color: rgb(35,40,42);
 }
 
 .operationItemSelected {
@@ -736,8 +736,8 @@ export default {
   border-radius: 5px;
   padding: 3px 10px;
   box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
-  color: #c8c8c8;
-  background-color: #1d2022;
+  color: #6b6b6b;
+  background-color: #fff;
 }
 
 

@@ -76,7 +76,6 @@ export default defineComponent({
 
 <style scoped>
 .ViewState {
-  background-color: #23282A;
   user-select: none;
   width: 100%;
   /*height: 500 rpx;*/

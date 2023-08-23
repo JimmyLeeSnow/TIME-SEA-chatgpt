@@ -79,7 +79,7 @@ export default {
   display: flex;
   overflow: auto;
 
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 @keyframes explainAnimation {
@@ -120,17 +120,17 @@ export default {
 
 .item {
   width: 210px;
-  background-color: rgb(27,30,32);
+  background-color: white;
   margin-bottom: 15px;
   border-radius: 8px;
   font-size: 15px;
-  color: #ffffff;
+  color: #303030;
   padding: 20px;
   box-shadow: 0 5px 7px rgba(35, 35, 35, 0.06);
 }
 
 .item:hover {
-  background-color: #312e2e;
+  background-color: #e6e6e6;
   cursor: pointer;
   transition: background-color .2s;
 }

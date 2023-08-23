@@ -5,9 +5,9 @@
         <img class="logo" :src="require('../assets/logoHead.svg')" alt="">
       </div>
       <div class="title">
-        TIME SEA PLUS
+        WOO CLOUD PLUS
       </div>
-      <input type="text" class="input" placeholder="请输入兑换码" v-model="inputValue" maxlength="8" style="background-color: #1d2022;color: whitesmoke"/>
+      <input type="text" class="input" placeholder="请输入兑换码" v-model="inputValue" maxlength="8" style="background-color: #fff;color: whitesmoke"/>
       <el-button type="primary" color="rgb(129,102,231)" class="button" @click="submit">兑换</el-button>
     </div>
   </div>
@@ -119,7 +119,7 @@ input:focus {
   overflow: auto;
   overflow-y: scroll;
   height: 100%;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 .logo {
@@ -132,7 +132,7 @@ input:focus {
   font-size: 24px;
   font-weight: 550;
   padding-top: 20px;
-  color: white;
+  color: #303030;
 }
 
 .input {

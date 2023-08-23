@@ -151,7 +151,7 @@ export default {
   padding: 0 20px 100px;
   display: flex;
   overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 @keyframes explainAnimation {
@@ -175,7 +175,7 @@ export default {
 
 
 .title {
-  color: white;
+  color: black;
   font-size: 20px;
   font-weight: 500;
   margin-top: 60px;
@@ -184,8 +184,8 @@ export default {
 
 ::v-deep( .vuepress-markdown-body) {
   padding: 0 0 0 16px;
-  color: #ffffff;
-  background-color: #1f2224;
+  color: #1f2224;
+  background-color: #ffffff;
 }
 
 
@@ -193,12 +193,12 @@ export default {
   min-height: 60px;
   max-width: 800px;
   width: 100%;
-  background: #1f2224;
+  background: #ffffff;
   border-radius: 8px;
   flex-direction: column;
   display: flex;
   position: relative;
-  box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
+  box-shadow: 0 5px 7px rgb(255 255 255 / 6%);
 }
 
 .completeText {
@@ -215,8 +215,8 @@ export default {
 
 >>>.mdPreview>.vuepress-markdown-body {
   padding: 0;
-  color: #ffffff;
-  background-color: rgb(27,30,32);
+  color: #1f2224;
+  background-color: #ffffff;
 }
 
 @media only screen and (max-width: 767px) {

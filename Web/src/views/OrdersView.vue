@@ -131,7 +131,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #23282A;
+  background-color: white;
 }
 
 @keyframes explainAnimation {

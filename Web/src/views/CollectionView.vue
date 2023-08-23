@@ -133,7 +133,7 @@ export default {
   padding: 30px;
   display: flex;
   overflow: auto;
-  background-color: rgb(38, 42, 44);
+  /*background-color: rgb(38, 42, 44);*/
 }
 
 @keyframes explainAnimation {
@@ -170,7 +170,7 @@ export default {
   flex: 1;
   width: 100%;
   box-sizing: border-box;
-  background: #1f2224;
+  background: #fff;
   border-radius: 8px;
   padding: 20px;
 }
@@ -178,7 +178,7 @@ export default {
 .title {
   font-size: 20px;
   font-weight: bold;
-  color: #f9f9f9;
+  color: rgb(27,30,32);
 }
 
 .desc {
@@ -187,7 +187,7 @@ export default {
 
 .item {
   box-sizing: border-box;
-  background: rgb(27,30,32);
+  background: #fff;
   border-radius: 8px;
   flex-direction: column;
   margin-top: 26px;
@@ -208,7 +208,7 @@ export default {
 .name {
   font-size: 16px;
   line-height: 28px;
-  color: #c7c7c7;
+  color: rgb(27,30,32);
 }
 
 .time {
@@ -230,10 +230,10 @@ export default {
   margin-right: 5px;
   display: flex;
   align-items: center;
-  background-color: rgb(35,40,42);
+  background-color: whitesmoke;
   border-radius: 100px;
   font-size: 13px;
-  color: whitesmoke;
+  color: rgb(35,40,42);
 }
 
 .operationItemSelected {
@@ -248,8 +248,8 @@ export default {
 
 ::v-deep( .vuepress-markdown-body) {
   padding: 0 0 0 16px;
-  color: #ffffff;
-  background-color: #1f2224;
+  color: #1f2224;
+  background-color: #ffffff;
 }
 
 </style>
