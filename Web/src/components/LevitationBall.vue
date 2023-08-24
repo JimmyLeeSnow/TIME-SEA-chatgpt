@@ -1,7 +1,7 @@
 <template>
   <img src="../assets/ball.svg" class="floating-ball" ref="ball" @mousedown="handleMouseDown"
        @click="dialogVisible=true">
-  <el-dialog v-model="dialogVisible" class="el-dialog" style="  background-color: rgb(29, 32, 34);" align-center="true"
+  <el-dialog v-model="dialogVisible" class="el-dialog" style="  background-color: rgb(229, 232, 234);" align-center="true"
              width="800px">
     <div class="logo">
       <img src="../assets/logoHead.svg"/>
@@ -189,7 +189,7 @@ export default defineComponent({
   text-align: center;
   font-size: 15px;
   padding-top: 20px;
-  color: #d0d0d0;
+  color: #303030;
   font-weight: 550;
   padding-bottom: 40px;
 }
@@ -198,7 +198,7 @@ export default defineComponent({
 .row {
   padding: 20px;
   margin: 10px 30px;
-  background-color: black;
+  background-color: white;
   border-radius: 5px
 }
 
