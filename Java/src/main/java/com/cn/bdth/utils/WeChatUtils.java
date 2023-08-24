@@ -113,7 +113,7 @@ public class WeChatUtils {
 
     public Mono<Void> filterImage(final String image) {
         return WebClient.builder()
-            .codecs(item -> item.defaultCodecs().maxInMemorySize(10 * 1024 * 1024 * 1024))
+            .codecs(item -> item.defaultCodecs().maxInMemorySize(100 * 1024 * 1024))
             .build()
             .get()
             .uri(domain + image)

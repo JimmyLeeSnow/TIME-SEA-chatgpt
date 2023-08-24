@@ -38,81 +38,82 @@ export default {
     //广告ID
     motivationalAdvertisingId: "adunit-ef9b2df38231106c",
     //SD模型
-    sdModels: [{
-        modelName: "chilloutmix_NiPrunedFp32Fix.safetensors",
-        text: "真实_Chilloutmix",
-        isSelected: true
-    },
-    {
-        modelName: "majicmixRealistic_betterV2V25.safetensors",
-        text: "真实_Majicmix",
-        isSelected: false
-    },
-    {
-        modelName: "epicrealism_naturalSinRC1VAE.safetensors",
-        text: "真实_Epicrealism",
-        isSelected: false
-    },
-    {
-        modelName: "室内设计通用模型-Interior DesignV1.0.safetensors",
-        text: "室内设计_Interior Design",
-        isSelected: false
-    },
-    {
-        modelName: "游戏图标_gameIconInstitute_v30.safetensors",
-        text: "游戏图标_Game-Icon",
-        isSelected: false
-    },
-    {
-        modelName: "MoonFilm_Film.Grain.v1.0.safetensors",
-        text: "胶片风_MoonFilm",
-        isSelected: false
-    },
-    {
-        modelName: "AWPortrait_v1.2.safetensors",
-        text: "海报杂志_AWPortrait",
-        isSelected: false
-    },
-    {
-        modelName: "Photo_style-CNvtuberMix_v1.0.ckpt",
-        text: "照片风_Photo style",
-        isSelected: false
-    },
-    {
-        modelName: "revAnimated_v1.2.2.safetensors",
-        text: "动漫_RevAnimated",
-        isSelected: false
-    },
-    {
-        modelName: "breakdomainrealistic_R2333.safetensors",
-        text: "动漫_Breakdomain",
-        isSelected: false
-    },
-    {
-        modelName: "Ghostmix_v20Bakedvae.safetensors",
-        text: "动漫_Ghostmix",
-        isSelected: false
-    },
-    {
-        modelName: "realcartoon3d_v6.safetensors",
-        text: "卡通_Cartoon3D",
-        isSelected: false
-    },
-    {
-        modelName: "SHMILY_v1.0.safetensors",
-        text: "水彩_SHMILY",
-        isSelected: false
-    },
-    {
-        modelName: "meinapastel_v6Pastel.safetensors",
-        text: "二次元_Meinapastel",
-        isSelected: false
-    },
-    {
-        modelName: "darkSushiMixMix_225D.safetensors",
-        text: "二次元_DarkSushiMix",
-        isSelected: false,
-    },
+    sdModels: [
+        {
+            modelName: "chilloutmix_NiPrunedFp32Fix.safetensors",
+            text: "真实_Chilloutmix",
+            isSelected: true
+        },
+        {
+            modelName: "majicmixRealistic_betterV2V25.safetensors",
+            text: "真实_Majicmix",
+            isSelected: false
+        },
+        {
+            modelName: "epicrealism_naturalSinRC1VAE.safetensors",
+            text: "真实_Epicrealism",
+            isSelected: false
+        },
+        {
+            modelName: "室内设计通用模型-Interior DesignV1.0.safetensors",
+            text: "室内设计_Interior Design",
+            isSelected: false
+        },
+        {
+            modelName: "游戏图标_gameIconInstitute_v30.safetensors",
+            text: "游戏图标_Game-Icon",
+            isSelected: false
+        },
+        {
+            modelName: "MoonFilm_Film.Grain.v1.0.safetensors",
+            text: "胶片风_MoonFilm",
+            isSelected: false
+        },
+        {
+            modelName: "AWPortrait_v1.2.safetensors",
+            text: "海报杂志_AWPortrait",
+            isSelected: false
+        },
+        {
+            modelName: "Photo_style-CNvtuberMix_v1.0.ckpt",
+            text: "照片风_Photo style",
+            isSelected: false
+        },
+        {
+            modelName: "revAnimated_v1.2.2.safetensors",
+            text: "动漫_RevAnimated",
+            isSelected: false
+        },
+        {
+            modelName: "breakdomainrealistic_R2333.safetensors",
+            text: "动漫_Breakdomain",
+            isSelected: false
+        },
+        {
+            modelName: "Ghostmix_v20Bakedvae.safetensors",
+            text: "动漫_Ghostmix",
+            isSelected: false
+        },
+        {
+            modelName: "realcartoon3d_v6.safetensors",
+            text: "卡通_Cartoon3D",
+            isSelected: false
+        },
+        {
+            modelName: "SHMILY_v1.0.safetensors",
+            text: "水彩_SHMILY",
+            isSelected: false
+        },
+        {
+            modelName: "meinapastel_v6Pastel.safetensors",
+            text: "二次元_Meinapastel",
+            isSelected: false
+        },
+        {
+            modelName: "darkSushiMixMix_225D.safetensors",
+            text: "二次元_DarkSushiMix",
+            isSelected: false,
+        },
     ],
     //多维对话功能 （预设值）
     multidimensional: [{
