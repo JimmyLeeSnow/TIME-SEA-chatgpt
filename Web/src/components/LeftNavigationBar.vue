@@ -21,7 +21,7 @@
 				<el-avatar :size="40" :icon="UserFilled" :src="require('../assets/logoHead.svg')" />
 				<div class="bottomRight">
 					<div class="bottomRightName">WOO CLOUD PLUS</div>
-					<div class="bottomRightEdition">v1.2.5</div>
+					<div class="bottomRightEdition">v1.2.9</div>
 				</div>
 			</div>
 		</div>
