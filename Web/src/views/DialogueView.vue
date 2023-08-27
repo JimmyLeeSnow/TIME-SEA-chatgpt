@@ -1099,4 +1099,72 @@ export default {
   width: 100px;
   margin-right: -20px;
 }
+
+@keyframes jumpT {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    background-color: #f9f9f9;
+  }
+
+  40% {
+    transform: scale(1);
+    background-color: rgb(186, 156, 241);
+  }
+}
+
+.dot0,
+.dot1,
+.dot2,
+.dot3 {
+  background: rgb(166, 129, 236);
+  width: 10px;
+  height: 10px;
+  border-color: #464646;
+  border-radius: 50%;
+}
+
+.dot_0,
+.dot_1,
+.dot_2,
+.dot_3 {
+  background: rgb(166, 129, 236);
+  width: 15px;
+  height: 15px;
+  border-color: #464646;
+  border-radius: 50%;
+}
+
+.dot0 {
+  animation: jumpT 1.3s -0.64s linear infinite;
+}
+
+.dot1 {
+  animation: jumpT 1.3s -0.32s linear infinite;
+}
+
+.dot2 {
+  animation: jumpT 1.3s -0.16s linear infinite;
+}
+
+.dot3 {
+  animation: jumpT 1.3s linear infinite;
+}
+
+.dot_0 {
+  animation: jumpT 1.3s -0.64s linear infinite;
+}
+
+.dot_1 {
+  animation: jumpT 1.3s -0.32s linear infinite;
+}
+
+.dot_2 {
+  animation: jumpT 1.3s -0.16s linear infinite;
+}
+
+.dot_3 {
+  animation: jumpT 1.3s linear infinite;
+}
 </style>
