@@ -173,7 +173,7 @@ export default defineComponent({
 
   .sendIcon {
     flex-shrink: 0;
-    margin: 0 12px 0px 4px;
+    margin: 0 12px 0px 0px;
     width: 36px;
     height: 36px;
     color: #fff;

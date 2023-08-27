@@ -644,7 +644,7 @@ export default {
   flex-direction: column;
   flex: 1;
   align-items: center;
-  padding: 0 20px 120px;
+  padding: 0 20px 140px;
   display: flex;
   overflow: auto;
   background-color: rgb(38, 42, 44);
