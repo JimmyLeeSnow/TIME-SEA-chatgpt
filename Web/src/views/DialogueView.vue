@@ -616,49 +616,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-:deep(.selectWrapper) {
-  .el-input,
-  .el-input {
-    .el-input__wrapper {
-      box-shadow: none !important;
-      background: none !important;
-
-      &:hover {
-        box-shadow: none;
-        background: none !important;
-      }
-    }
-  }
-
-  &.el-select--disabled {
-    background: white;
-    .el-input__wrapper {
-      background: #fff;
-    }
-  }
-}
-
-:deep(.footer) {
-  .el-textarea__inner {
-    background: #272c2f;
-    box-shadow: none;
-    max-height: 400px;
-    padding: 20px;
-    margin: 10px;
-    width: 98%;
-
-    color: #eee;
-    &:hover {
-      box-shadow: none;
-      background: #272c2f;
-    }
-
-    &.el-select--disabled {
-      background: white;
-    }
-  }
-}
-
 @keyframes beating {
   0% {
     transform: translateY(0);

@@ -1,5 +1,6 @@
 <template>
-  <!-- 
+  <div style="width: 100%">
+    <!-- 
     放到一起好改样式
 
 
@@ -17,40 +18,48 @@
         inputRef.value.resetInputValue();
     2、输入框聚焦   父组件代码
         inputRef.value.$refs.inputRefInner.focus();
+
+
+
+    todo:
+    1、组件兼容其他页面，包括部分页面不需要选择这个组件
+
    -->
-  <div class="InputFormFieldWapper">
-    <el-select
-      v-model="modelInner"
-      class="selectWrapper"
-      placeholder="Ai模型"
-      @change="updateModel"
-      style="width: 115px"
-    >
-      <el-option value="BASIC" label="标准" />
-      <el-option value="ADVANCED" label="智能" />
-    </el-select>
-    <el-input
-      @keydown="handleKeyDown"
-      v-model="inputTextInner"
-      autosize
-      @input="updateInputText"
-      ref="inputRefInner"
-      type="textarea"
-      :placeholder="aiLoading ? '思考中..' : '输入你想问的...'"
-      :disabled="aiLoading"
-    >
-    </el-input>
-    <div class="animation-dot" v-if="aiLoading">
-      <div class="dot0"></div>
-      <div class="dot1"></div>
-      <div class="dot2"></div>
-      <div class="dot3"></div>
-      <div class="dot4"></div>
-    </div>
-    <div @click="onSubmit" class="sendIcon" v-else>
-      <el-icon :size="20">
-        <Promotion />
-      </el-icon>
+    <div class="InputFormFieldWapper">
+      <el-select
+        v-model="modelInner"
+        v-if="needSelect"
+        class="selectWrapper"
+        placeholder="Ai模型"
+        @change="updateModel"
+        style="width: 115px"
+      >
+        <el-option value="BASIC" label="标准" />
+        <el-option value="ADVANCED" label="智能" />
+      </el-select>
+      <el-input
+        @keydown="handleKeyDown"
+        v-model="inputTextInner"
+        autosize
+        @input="updateInputText"
+        ref="inputRefInner"
+        type="textarea"
+        :placeholder="aiLoading ? '思考中..' : '输入你想问的...'"
+        :disabled="aiLoading"
+      >
+      </el-input>
+      <div class="animation-dot" v-if="aiLoading">
+        <div class="dot0"></div>
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+        <div class="dot3"></div>
+        <div class="dot4"></div>
+      </div>
+      <div @click="onSubmit" class="sendIcon" v-else>
+        <el-icon :size="20">
+          <Promotion />
+        </el-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -65,6 +74,10 @@ export default defineComponent({
     Promotion,
   },
   props: {
+    needSelect: {
+      type: Boolean,
+      default: true,
+    },
     // 选择的模型
     model: {
       type: String,
@@ -160,7 +173,7 @@ export default defineComponent({
 
   .sendIcon {
     flex-shrink: 0;
-    margin: 0 12px;
+    margin: 0 12px 0px 4px;
     width: 36px;
     height: 36px;
     color: #fff;
@@ -195,7 +208,7 @@ export default defineComponent({
   }
 }
 
-:deep(.footer) {
+:deep(.InputFormFieldWapper) {
   .el-textarea__inner {
     background: #272c2f;
     box-shadow: none;

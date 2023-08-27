@@ -3,28 +3,67 @@
     <div class="container">
       <div class="content">
         <el-row :gutter="20">
-          <el-col @click="onItem(item.path)" v-for="(item, index) in menuCollection" :key="index" :xs="12" :sm="8" :md="6">
+          <el-col
+            @click="onItem(item.path)"
+            v-for="(item, index) in menuCollection"
+            :key="index"
+            :xs="12"
+            :sm="8"
+            :md="6"
+          >
             <div class="item">
               <div>
-                <img :src="require('../assets/'+ item.icon)" style="width: 45px;height: 45px"/>
+                <img
+                  :src="require('../assets/' + item.icon)"
+                  style="width: 45px; height: 45px"
+                />
               </div>
-              <div >
-                <div style="font-weight: 700;font-size: 16px;color: #a5a5a5;padding-top: 10px">
+              <div>
+                <div
+                  style="
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: #a5a5a5;
+                    padding-top: 10px;
+                  "
+                >
                   {{ item.title }}
                 </div>
-                <div style="padding-top: 20px;font-size: 7px;color: #878787; display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;">
+                <div
+                  style="
+                    padding-top: 20px;
+                    font-size: 7px;
+                    color: #878787;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                >
                   {{ item.introduce }}
                 </div>
               </div>
-              <div style="display: flex;font-size: 10px;color: #d1d1d1;padding-top: 14px">
-                <div style="background-color:rgb(72,78,81);padding: 2px 5px;border-radius: 3px;margin-right: 5px" v-for="(item2,index2) in item.label" :key="index2">
-                  {{item2}}
+              <div
+                style="
+                  display: flex;
+                  font-size: 10px;
+                  color: #d1d1d1;
+                  padding-top: 14px;
+                "
+              >
+                <div
+                  style="
+                    background-color: rgb(72, 78, 81);
+                    padding: 2px 5px;
+                    border-radius: 3px;
+                    margin-right: 5px;
+                  "
+                  v-for="(item2, index2) in item.label"
+                  :key="index2"
+                >
+                  {{ item2 }}
                 </div>
-
               </div>
             </div>
           </el-col>
@@ -32,38 +71,38 @@
       </div>
     </div>
   </div>
-  <LoginDialog :show="loginVisible" @close="loginVisible = false"/>
+  <LoginDialog :show="loginVisible" @close="loginVisible = false" />
 </template>
 
 <script>
-import {ref} from "vue";
-import {useRouter} from 'vue-router'
-import {useStore} from 'vuex'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import LoginDialog from "@/components/LoginDialog.vue";
 
 export default {
   name: "PresetCharacterView",
-  components: {LoginDialog},
+  components: { LoginDialog },
   setup() {
-    let store = useStore()
-    let router = useRouter()
-    let menuCollection = ref(require('../utils/LaboratoryData.json'));
-    let loginVisible = ref(false)
+    let store = useStore();
+    let router = useRouter();
+    let menuCollection = ref(require("../utils/LaboratoryData.json"));
+    let loginVisible = ref(false);
 
     function onItem(data) {
-      if (!store.getters.userinfo) return loginVisible.value = true
+      if (!store.getters.userinfo) return (loginVisible.value = true);
       router.push({
-        path: data
-      })
+        path: data,
+      });
     }
 
     return {
       menuCollection,
       onItem,
-      loginVisible
-    }
-  }
-}
+      loginVisible,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -119,9 +158,9 @@ export default {
 }
 
 .item {
-  width: 210px;
+  width: 80%;
   height: 160px;
-  background-color: rgb(27,30,32);
+  background-color: rgb(27, 30, 32);
   margin-bottom: 15px;
   border-radius: 8px;
   font-size: 15px;
@@ -133,7 +172,7 @@ export default {
 .item:hover {
   background-color: #312e2e;
   cursor: pointer;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
 }
 
 @media only screen and (max-width: 767px) {
