@@ -138,6 +138,7 @@
   } from "@element-plus/icons-vue";
   import { ElNotification } from "element-plus";
   import { FavoritesAdd, GetUserInfo } from "../../api/BSideApi";
+  import { ProhibitedTextDetection, UserDisable } from "../../api/YSideApi";
   import { useStore } from "vuex";
   import LoginDialog from "@/components/LoginDialog.vue";
   import InputFormField from "@/components/InputFormField.vue";
@@ -174,6 +175,31 @@
       let model = ref("gpt-3.5-turbo");
       let dataIndex = ref(0);
       const imageUrl = ref("");
+
+      /**
+       * 违禁词检测
+      */
+      async function textDetection(messages) {
+        try {
+          const loginAccount = localStorage.getItem('login_account')
+          const res = await ProhibitedTextDetection({
+            messages: messages,
+            account: loginAccount
+          })
+          if (res) {
+            if (res.data.code === 2004) {
+              ElNotification({
+                message: res.data.msg,
+                type: 'error',
+              })
+              throw new Error(res.data.msg);
+            }
+          }
+        } catch (e) {
+          throw new Error('违禁词校验失败，请联系管理员查看原因');
+        }
+      }
+
       onMounted(() => {
         if (store.getters.userinfo) getUser();
         //获取图片域名
@@ -208,6 +234,39 @@
           let content = input.value;
           // 调用子组件方法，清空内容
           inputRef.value.resetInputValue();
+          // 获取用户信息
+          const emailAccount = localStorage.getItem('login_email')
+          const userInfo = localStorage.getItem('user')
+          // 违禁词检测
+          try {
+            await textDetection({
+              content: content,
+              emailAccount: emailAccount,
+              userInfo: userInfo
+            })
+          } catch (error) {
+            if (!store.getters.userinfo) {
+              return loginVisible.value = true
+            } else {
+              return
+            }
+          }
+          // 违禁状态检测
+          try {
+            let res = await UserDisable({
+              emailAccount: emailAccount,
+              userInfo: userInfo
+            })
+            if (res.data.code === 4000) {
+              ElNotification({
+                message: res.data.msg,
+                type: 'error',
+              })
+              throw new Error(res.data.msg);
+            }
+          } catch (error) {
+            return;
+          }
           conversationList.value.push({
             user: content,
           });

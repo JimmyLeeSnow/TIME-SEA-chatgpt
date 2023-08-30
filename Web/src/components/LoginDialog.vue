@@ -566,6 +566,7 @@
           });
           loginLoading.value = false;
           isLogin.value = true;
+          localStorage.setItem('login_email', value.email)
           location.reload();
         } catch (e) {
           ElMessage.error(e);

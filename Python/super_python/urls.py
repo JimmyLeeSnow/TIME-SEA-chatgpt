@@ -16,10 +16,16 @@ Including another URLconf
 from django.urls import path,include, re_path
 from django.conf import settings
 
+from system.views import ProhibitedTextDetectionView, UserStatusDisableView
+
 # 媒体文件流式响应
 from utils.streamingmedia_response import streamingmedia_serve
 
 urlpatterns = [
     # 处理媒体文件
     path('media/<path:path>', streamingmedia_serve, {'document_root': settings.MEDIA_ROOT}, ),
+    # 违禁词检测
+    path('python/system/textdetection/', ProhibitedTextDetectionView.as_view(), name='违禁词检测'),
+    # 违禁状态检测
+    path('python/system/userdisable/', UserStatusDisableView.as_view(), name='违禁状态检测'),
 ]

@@ -1,9 +1,9 @@
 '''
-FilePath: settings copy.py
+FilePath: settings_example.py
 Author: yun.huang <1594909346@qq.com>
 Date: 2023-08-23 18:09:17
 LastEditors: yun.huang <1594909346@qq.com>
-LastEditTime: 2023-08-23 18:09:31
+LastEditTime: 2023-08-30 15:05:06
 Version: 1.0.1
 Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
 Descripttion: 愿你开心每一天~
@@ -389,23 +389,6 @@ LOGGING = {
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES':
         ( 'rest_framework.renderers.JSONRenderer', ),
-}
-
-# ================================================= #
-# ****************** simplejwt配置 ***************** #
-# ================================================= #
-# token加密字段
-SECRET_KEY = 'XNJtkYytLsPngzQdNvLh'
-SIMPLE_JWT = {
-    # token加密方法
-    'ALGORITHM': 'SHA256',
-    # token有效时长
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=43200),
-    # token刷新后的有效时间
-    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=43200),
-    # 设置header字段Authorization的值得前缀： JWT accesstoken字符串
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'ROTATE_REFRESH_TOKENS': True
 }
 
 # ====================================#

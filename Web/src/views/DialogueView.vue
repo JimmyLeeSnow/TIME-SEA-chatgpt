@@ -231,6 +231,7 @@
   } from "@element-plus/icons-vue";
   import { ElNotification } from "element-plus";
   import { FavoritesAdd, GetUserInfo } from "../../api/BSideApi";
+  import { ProhibitedTextDetection, UserDisable } from "../../api/YSideApi";
   import { useStore } from "vuex";
   import LoginDialog from "@/components/LoginDialog.vue";
   import InputFormField from "@/components/InputFormField.vue";
@@ -277,6 +278,31 @@
       let dialogueDisplay = ref(false);
       const dialogueCache = ref({});
       const dialogueWidth = ref("30%");
+
+      /**
+       * 违禁词检测
+      */
+      async function textDetection(messages) {
+        try {
+          const loginAccount = localStorage.getItem('login_account')
+          const res = await ProhibitedTextDetection({
+            messages: messages,
+            account: loginAccount
+          })
+          if (res) {
+            if (res.data.code === 2004) {
+              ElNotification({
+                message: res.data.msg,
+                type: 'error',
+              })
+              throw new Error(res.data.msg);
+            }
+          }
+        } catch (e) {
+          throw new Error('违禁词校验失败，请联系管理员查看原因');
+        }
+      }
+
       onMounted(() => {
         window.addEventListener("resize", handleResize);
         handleResize();
@@ -419,8 +445,40 @@
           // 获取输入内容
           let content = input.value;
           // 清空内容
-          // input.value = "";
           inputRef.value.resetInputValue();
+          // 获取用户信息
+          const emailAccount = localStorage.getItem('login_email')
+          const userInfo = localStorage.getItem('user')
+          // 违禁词检测
+          try {
+            await textDetection({
+              content: content,
+              emailAccount: emailAccount,
+              userInfo: userInfo
+            })
+          } catch (error) {
+            if (!store.getters.userinfo) {
+              return loginVisible.value = true
+            } else {
+              return
+            }
+          }
+          // 违禁状态检测
+          try {
+            let res = await UserDisable({
+              emailAccount: emailAccount,
+              userInfo: userInfo
+            })
+            if (res.data.code === 4000) {
+              ElNotification({
+                message: res.data.msg,
+                type: 'error',
+              })
+              throw new Error(res.data.msg);
+            }
+          } catch (error) {
+            return;
+          }
           // 将对话内容push进整个绘画
           conversationList.value.push({
             user: content,
@@ -619,6 +677,7 @@
         onCollection,
         copyAnswer,
         aiLoading,
+        textDetection,
         closeSocket,
         dataIndex,
         imageUrl,

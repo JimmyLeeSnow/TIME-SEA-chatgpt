@@ -60,6 +60,8 @@ IS_DEMO = False
 IS_SINGLE_TOKEN = True
 # 是否关闭前端API访问
 ALLOW_FRONTEND = True
+# api白名单
+FRONTEND_API_LIST = ['/api/app/']
 # 前端接口前缀
 DOMAIN_HOST = "https://www.baidu.com:8626"
 EXEC_LOG_PATH =  os.path.join(BASE_DIR, 'logs','super_python.log')

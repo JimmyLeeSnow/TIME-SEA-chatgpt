@@ -8,7 +8,6 @@ sa-token:
   is-concurrent: true
   is-share: false
   is-log: false
-  jwt-secret-key: XNJtkYytLsPngzQdNvLh
 
 spring:
   codec:

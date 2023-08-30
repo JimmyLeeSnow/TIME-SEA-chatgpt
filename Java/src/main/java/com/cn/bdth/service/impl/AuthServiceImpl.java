@@ -162,7 +162,7 @@ public class AuthServiceImpl implements AuthService {
         if (user == null) {
             //初始化用户登录次数
             user = new User()
-                    .setFrequency(funCommon.getServer().getIncentiveFrequency())
+                    .setFrequency(userInspiritCommon.getInspiritStructure().getIncentiveFrequency())
                     .setType("USER")
                     .setIsSignIn(0L)
                     .setOpenId(openId);

@@ -1,15 +1,7 @@
 部署步骤参考，本项目只支持python3
 配置部分
-1. 修改java application.yml
-```
-jwt-secret-key: 你设定的token key
-```
-2. 修改python settings.py
-```
-SECRET_KEY = '你设定的token key'
-```
-3. 修改settings_example.py和config_example.py为settings.py和config.py
-4. 配置config.py
+1. 修改settings_example.py和config_example.py为settings.py和config.py
+2. 配置config.py
 
 数据部分
 1. 先将原数据库数据导出成sql文件
