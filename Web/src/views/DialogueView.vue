@@ -9,7 +9,7 @@
         class="logo"
         alt="Vue logo"
         src="../assets/logo02.svg" />
-      <div class="expositoryCase">欢迎使用TIME SEA PLUS</div>
+      <div class="expositoryCase">欢迎使用WOO CLOUD PLUS</div>
       <div class="consume">
         <el-icon>
           <Goods />
@@ -165,7 +165,7 @@
           src="../assets/logo02.svg"
           class="cache-img" />
       </div>
-      <div class="cache-text">TIME SEA PLUS</div>
+      <div class="cache-text">WOO CLOUD PLUS</div>
       <div class="cache-flex-center cache-padding-top">
         <div
           class="cache-btn"

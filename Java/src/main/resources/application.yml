@@ -3,14 +3,16 @@ server:
 
 sa-token:
   token-name: token
-  activity-timeout: -1
+  timeout: 43200
+  activity-timeout: 43200
   is-concurrent: true
-  is-share: true
+  is-share: false
   is-log: false
+  jwt-secret-key: XNJtkYytLsPngzQdNvLh
 
 spring:
   codec:
-    max-in-memory-size: 1048576
+    max-in-memory-size: 104857600
   servlet:
     multipart:
       max-file-size: 10240MB

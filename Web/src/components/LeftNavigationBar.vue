@@ -43,7 +43,7 @@
           :icon="UserFilled"
           :src="require('../assets/logoHead.svg')" />
         <div class="bottomRight">
-          <div class="bottomRightName">TIME SEA PLUS</div>
+          <div class="bottomRightName">WOO CLOUD PLUS</div>
           <div class="bottomRightEdition">v1.3.1</div>
         </div>
       </div>

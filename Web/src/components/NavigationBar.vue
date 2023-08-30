@@ -50,7 +50,7 @@
     <div v-else @click="dialogVisible = true" class="login">登录</div>
 	</nav>
 
-	<el-dialog v-model="appletDialogVisible" title="TIME SEA PLUS" width="300" center align-center>
+	<el-dialog v-model="appletDialogVisible" title="WOO CLOUD PLUS" width="300" center align-center>
 		<div class="wxAppletCodeRow">
 			<img class="wxAppletCode" :src="require('../assets/wxAppletCode.jpg')">
 			<div>微信扫一扫</div>

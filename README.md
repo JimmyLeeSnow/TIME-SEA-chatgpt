@@ -173,7 +173,7 @@ gpt:
   # BOT 中文名
   botNameChinese: '时间海'
   # BOT 英文名
-  botNameEnglish: 'TIME SEA'
+  botNameEnglish: 'WOO CLOUD'
 
 # 支付宝配置
 ali-pay:

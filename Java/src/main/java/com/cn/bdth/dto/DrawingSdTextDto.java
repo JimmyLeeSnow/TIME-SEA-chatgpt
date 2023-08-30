@@ -28,5 +28,11 @@ public class DrawingSdTextDto {
     @NotBlank(message = "模型名称不能为空")
     private String modelName;
 
+    @NotBlank(message = "采样率不能为空")
+    private String rate;
+
+    @NotNull(message = "迭代步数不能为空")
+    private Integer steps;
+
     private String negative_prompt;
 }

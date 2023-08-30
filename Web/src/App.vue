@@ -1,8 +1,8 @@
 <template>
-  <NavigationBar/>
-  <LeftNavigationBar/>
+  <NavigationBar />
+  <LeftNavigationBar />
   <el-dialog class="announcement" v-model="dialogVisible" center align-center width="380px"
-             style="background-color: rgb(27,30,32)">
+    style="background-color: rgb(27, 30, 32)">
     <span style="text-align: center">{{ context }}</span>
     <template #footer>
       <span class="dialog-footer">
@@ -12,29 +12,28 @@
       </span>
     </template>
   </el-dialog>
-  <levitation-ball/>
+  <levitation-ball />
 </template>
 
 <script>
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 import LeftNavigationBar from "@/components/LeftNavigationBar.vue";
 import LevitationBall from "@/components/LevitationBall.vue";
 import NavigationBar from "@/components/NavigationBar.vue";
-import {getAnnouncement} from "../api/BSideApi";
-import {onMounted, ref} from "vue";
+import { getAnnouncement } from "../api/BSideApi";
+import { onMounted, ref } from "vue";
 
 export default {
-  components: {LeftNavigationBar, NavigationBar,LevitationBall},
+  components: { LeftNavigationBar, NavigationBar, LevitationBall },
   setup() {
-    let store = useStore()
+    let store = useStore();
     store.commit("initState");
-    const dialogVisible = ref(false)
-    const context = ref('')
+    const dialogVisible = ref(false);
+    const context = ref("");
     onMounted(() => {
       setTimeout(() => {
         getAnnouncementData()
       }, 100)
-
     })
 
     async function getAnnouncementData() {
@@ -45,18 +44,21 @@ export default {
           if (item !== null) {
             let parse = JSON.parse(item);
             if (parse.logotypeId !== announcement.logotypeId) {
-              localStorage.setItem("announcement", JSON.stringify(announcement))
-              context.value = announcement.context
-              dialogVisible.value = true
+              localStorage.setItem(
+                "announcement",
+                JSON.stringify(announcement)
+              );
+              context.value = announcement.context;
+              dialogVisible.value = true;
             }
           } else {
-            localStorage.setItem("announcement", JSON.stringify(announcement))
-            context.value = announcement.context
-            dialogVisible.value = true
+            localStorage.setItem("announcement", JSON.stringify(announcement));
+            context.value = announcement.context;
+            dialogVisible.value = true;
           }
         }
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
 
@@ -64,10 +66,10 @@ export default {
 
     return {
       dialogVisible,
-      context
-    }
-  }
-}
+      context,
+    };
+  },
+};
 
 
 </script>
@@ -133,32 +135,33 @@ body {
 }
 
 
-.login-dialog > header {
+.login-dialog>header {
   display: none;
 }
 
-.login-dialog > .el-dialog__body {
+.login-dialog>.el-dialog__body {
   padding: 0 !important;
 }
 
-.el-switch__core{
+.el-switch__core {
   background: #393939 !important;
 }
-.el-input-group__append{
+
+.el-input-group__append {
   box-shadow: none !important;
 }
-.el-input-group__append{
+
+.el-input-group__append {
   background: none !important;
 }
 
 .el-pagination .btn-prev,
 .el-pagination .btn-next {
-  background-color: rgb(35,40,42) !important;
+  background-color: rgb(35, 40, 42) !important;
 }
 
 .el-pagination .el-pager li:not(.active) {
-  background-color: rgb(35,40,42) !important;
+  background-color: rgb(35, 40, 42) !important;
   color: darkgray !important;
 }
-
 </style>

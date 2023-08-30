@@ -33,6 +33,12 @@
                 <spring.profiles.active>prod</spring.profiles.active>
             </properties>
         </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <spring.profiles.active>local</spring.profiles.active>
+            </properties>
+        </profile>
     </profiles>
     <dependencies>
         <dependency>
@@ -105,11 +111,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.ipokerface</groupId>
-            <artifactId>snowflake-id-generator</artifactId>
-            <version>2.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

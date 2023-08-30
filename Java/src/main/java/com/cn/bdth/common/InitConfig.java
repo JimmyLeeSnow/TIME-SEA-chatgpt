@@ -48,6 +48,8 @@ public class InitConfig {
                             .setEmail(rootEmail)
                             .setPassword(s)
                             .setType(AuthConstant.ADMIN)
+                            .setFrequency(0L)
+                            .setIsSignIn(0L)
             );
         log.info("初始化管理员完毕");
     }

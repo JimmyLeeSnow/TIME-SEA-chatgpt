@@ -15,7 +15,7 @@
           :src="require('../assets/logoHead.svg')"
           alt="" />
       </div>
-      <div class="title">TIME SEA PLUS</div>
+      <div class="title">WOO CLOUD PLUS</div>
       <input
         type="text"
         class="input"

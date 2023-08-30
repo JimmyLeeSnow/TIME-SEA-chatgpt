@@ -207,7 +207,7 @@
         </div>
         <div style="padding: 20px 40px 30px">
           <div class="login-title">
-            <div class="login-selected">TIME SEA PLUS</div>
+            <div class="login-selected">WOO CLOUD PLUS</div>
           </div>
           <el-form
             @keyup.enter="retrievePassword"
@@ -511,7 +511,7 @@
               clearInterval(timerId);
               ElNotification({
                 title: "登录成功",
-                message: "欢迎使用TIME SEA PLUS",
+                message: "欢迎使用WOO CLOUD PLUS",
                 type: "success",
               });
               emit("loginSucceeded");
@@ -561,7 +561,7 @@
           loginLoading.value = false;
           ElNotification({
             title: "登录成功",
-            message: "快登录体验TIME SEA PLUS吧",
+            message: "快登录体验WOO CLOUD PLUS吧",
             type: "success",
           });
           loginLoading.value = false;
