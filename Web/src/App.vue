@@ -1,12 +1,22 @@
 <template>
   <NavigationBar />
   <LeftNavigationBar />
-  <el-dialog class="announcement" v-model="dialogVisible" center align-center width="380px"
-    style="background-color: rgb(27, 30, 32)">
+  <el-dialog
+    class="announcement"
+    v-model="dialogVisible"
+    center
+    align-center
+    width="380px"
+    style="background-color: rgb(27, 30, 32)"
+  >
     <span style="text-align: center">{{ context }}</span>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false" color="#626aef">
+        <el-button
+          type="primary"
+          @click="dialogVisible = false"
+          color="#626aef"
+        >
           朕已阅
         </el-button>
       </span>
@@ -32,9 +42,9 @@ export default {
     const context = ref("");
     onMounted(() => {
       setTimeout(() => {
-        getAnnouncementData()
-      }, 100)
-    })
+        getAnnouncementData();
+      }, 100);
+    });
 
     async function getAnnouncementData() {
       try {
@@ -62,16 +72,12 @@ export default {
       }
     }
 
-
-
     return {
       dialogVisible,
       context,
     };
   },
 };
-
-
 </script>
 
 <style>
@@ -80,20 +86,19 @@ export default {
   border-radius: 10px;
 }
 
-
 @media (max-width: 767px) {
   .announcement {
     width: 70%;
   }
 }
 
-
 #app {
   width: 100%;
   height: 100%;
   flex-direction: column;
   display: flex;
-  font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-family: "PingFang SC", "Helvetica Neue", Helvetica, "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   box-sizing: border-box;
   padding: 20px;
   letter-spacing: 1px;
@@ -110,11 +115,10 @@ body {
   margin: 0;
   padding: 0;
   /*background: #f6f6f6;*/
-  background: #1D2022FF;
+  background: #1d2022ff;
   color: #303030;
   width: 100%;
   height: 100%;
-
 }
 
 /* TODO 滚动条样式*/
@@ -134,23 +138,20 @@ body {
   background: rgba(0, 0, 0, 0);
 }
 
-
-.login-dialog>header {
+.login-dialog > header {
   display: none;
 }
 
-.login-dialog>.el-dialog__body {
+.login-dialog > .el-dialog__body {
   padding: 0 !important;
 }
 
 .el-switch__core {
   background: #393939 !important;
 }
-
 .el-input-group__append {
   box-shadow: none !important;
 }
-
 .el-input-group__append {
   background: none !important;
 }
