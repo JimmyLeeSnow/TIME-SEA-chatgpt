@@ -9,15 +9,15 @@
 # 先将用户表的字段补全再导出数据！！！
 mysqldump -u root -p -t super_bot > super_bot.sql
 ```
-1. 删除数据库
+2. 删除数据库
 ```
 mysql -uroot -p -e "drop database super_bot;"
 ```
-1. 创建新数据库
+3. 创建新数据库
 ```
 mysql -uroot -p -e "CREATE DATABASE super_bot CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
-1. 安装python扩展
+4. 安装python扩展
 ```
 # centos
 yum install mysql-devel
@@ -26,15 +26,21 @@ apt-get install libmysqlclient-dev
 # 根据系统执行上面的命令
 pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
-1. 创建python的sql文件
+5. 创建python的sql文件
 ```
 python3 manage.py makemigrations
 ```
-1. 执行python的sql文件
+6. 执行python的sql文件
 ```
 python3 manage.py migrate
 ```
-1. 导入sql文件
+7. 导入sql文件
 ```
 mysql -uroot -p super_bot < super_bot.sql
 ```
+8. 将后端证书放置在项目根目录
+9. 启动项目
+```
+nohup /usr/bin/python3 manage.py runsslserver --certificate ./xxx.pem --key ./xxx.key 0.0.0.0:8626 &
+```
+10. 微信小程序域名白名单增加8626端口

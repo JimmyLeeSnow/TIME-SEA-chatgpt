@@ -18,7 +18,7 @@ v1.3.0 现在可以选择性部署 网页或者小程序 也可以两者都部�
 
 
 web 演示
-https://anchwngb.cn/
+https://chat.yycld.com/
 
 
 ## 小程序效果展示
