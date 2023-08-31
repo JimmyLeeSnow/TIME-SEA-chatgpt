@@ -107,7 +107,7 @@ import env from "@/utils/env";
 import {getChat, getToken, getUser, removeChat, removeToken, removeUser} from "@/utils/utils";
 import {conversionImage} from "@/utils/image";
 import {deleteStarDialogue, putStarDialogue} from "@/api/user";
-
+import { ProhibitedUserDisable, ProhibitedTextDetection } from "@/api/python";
 
 export default {
   computed: {
@@ -215,9 +215,35 @@ export default {
       });
     },
     /**
+     * 违禁词检测
+     */
+     textDetection: async function (messages) {
+      try {
+        const res = await ProhibitedTextDetection({ messages: messages });
+        if (res) {
+          if (res.data.code === 2004) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000
+            });
+            return { status: false, message: res.data.msg };
+          }
+        }
+        return { status: true };
+      } catch (e) {
+        uni.showToast({
+          title: '违禁词校验失败，请联系管理员查看原因',
+          icon: 'none',
+          duration: 2000
+        });
+        return { status: false, message: '违禁词校验失败，请联系管理员查看原因' };
+      }
+    },
+    /**
      * 发送消息
      */
-    sendMessage: function () {
+    sendMessage: async function () {
       const _this = this
       //对话中不执行
       if (!this.isNextSend) {
@@ -234,6 +260,32 @@ export default {
         });
         return;
       }
+      // 构造一个字典 同步web端
+      let messages = {
+        'content': verifyInput,
+        'emailAccount': '',
+        'userInfo': JSON.stringify(_this.userInfo)
+      };
+      // 违禁状态检测
+      let statusResult = await ProhibitedUserDisable(messages);
+      if (statusResult.data.code != 2000) {
+        uni.showToast({
+          title: statusResult.data.msg,
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      };
+      // 违禁词检测
+      let textResult = await _this.textDetection(messages);
+      if (!textResult.status) {
+        uni.showToast({
+          title: textResult.message,
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      };
       // 将字符串中的英文转为大写并去除空格 方便校验
       verifyInput = verifyInput.toUpperCase().replace(/\s/g, '');
       // 检验字符串是否包含关键词

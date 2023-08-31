@@ -71,6 +71,7 @@
 
 import env from "@/utils/env";
 import { addSdDrawingTextTaskQueue, isDrawingSucceed, sdConnectivity } from "@/api/drawing";
+import { ProhibitedUserDisable, ProhibitedTextDetection } from "@/api/python";
 import LoadingComponent from "@/wxcomponents/components/loadingComponent.vue";
 import GenerateLoadingComponent from "@/pages/drawing/components/generateLoadingComponent.vue";
 
@@ -196,6 +197,32 @@ export default {
       clearInterval(this.timer);
     },
     /**
+     * 违禁词检测
+     */
+     textDetection: async function (messages) {
+      try {
+        const res = await ProhibitedTextDetection({ messages: messages });
+        if (res) {
+          if (res.data.code === 2004) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000
+            });
+            return { status: false, message: res.data.msg };
+          }
+        }
+        return { status: true };
+      } catch (e) {
+        uni.showToast({
+          title: '违禁词校验失败，请联系管理员查看原因',
+          icon: 'none',
+          duration: 2000
+        });
+        return { status: false, message: '违禁词校验失败，请联系管理员查看原因' };
+      }
+    },
+    /**
      * 提交
      */
     submit: async function () {
@@ -212,6 +239,32 @@ export default {
       const _this = this
       const tmplIds = env.tmplIds
       let generateLoadingRef = _this.$refs.generateLoadingRef;
+      // 构造一个字典 同步web端
+      let messages = {
+        'content': _this.form.prompt,
+        'emailAccount': '',
+        'userInfo': JSON.stringify(uni.getStorageSync('user'))
+      };
+      // 违禁状态检测
+      let statusResult = await ProhibitedUserDisable(messages);
+      if (statusResult.data.code != 2000) {
+        uni.showToast({
+          title: statusResult.data.msg,
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      };
+      // 违禁词检测
+      let textResult = await _this.textDetection(messages);
+      if (!textResult.status) {
+        uni.showToast({
+          title: textResult.message,
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      };
       uni.requestSubscribeMessage({
         tmplIds: tmplIds,
         success: async function (res) {

@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 支持https
+    'sslserver',
     # api规范
     'rest_framework',
     # 允许跨域
@@ -428,6 +430,8 @@ SWAGGER_SETTINGS = {
 # 全局控制日志记录
 API_LOG_ENABLE = True
 API_LOG_METHODS = ['POST', 'UPDATE', 'DELETE', 'PUT']
+# 支持https请求
+SECURE_SSL_REDIRECT = True
 # 日志记录显示的请求模块中文名映射
 API_MODEL_MAP = {
     "/api/token/": "登录模块",

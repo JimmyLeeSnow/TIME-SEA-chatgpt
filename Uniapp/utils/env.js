@@ -13,6 +13,8 @@ export default {
     author: '佑云',
     // HTTP请求 基类
     baseUrl: 'https://XXXXXX:8625',
+    // PYTHON请求 基类
+    pythonUrl: 'https://XXXXXX:8626',
     // 长连接请求 基类
     baseWs: 'wss://XXXXXX:8625',
     // 图片服务器域名

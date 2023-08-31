@@ -812,7 +812,7 @@
   .suspend {
     animation: explainAnimation 0.3s;
     position: fixed;
-    bottom: 150px;
+    bottom: 200px;
     margin-top: 15px;
     display: flex;
     align-items: center;

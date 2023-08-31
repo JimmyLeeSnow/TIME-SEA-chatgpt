@@ -3,7 +3,7 @@ FilePath: models.py
 Author: yun.huang <1594909346@qq.com>
 Date: 2023-08-23 21:58:35
 LastEditors: yun.huang <1594909346@qq.com>
-LastEditTime: 2023-08-30 17:08:29
+LastEditTime: 2023-08-30 22:10:57
 Version: 1.0.1
 Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
 Descripttion: 愿你开心每一天~
@@ -27,8 +27,8 @@ class Users(AbstractUser):
     type = models.CharField(max_length=5, choices=TYPE_CHOICES, default='USER', null=False)
     frequency = models.BigIntegerField(default=0, verbose_name='Ai币')
     is_sign_in = models.BooleanField(default=False, verbose_name='是否签到')
-    detection_counts = models.BigIntegerField(default=0, null=False, verbose_name="违禁次数", help_text="违禁次数")
-    is_disable = models.BooleanField(default=0, null=False, verbose_name="是否封禁", help_text="是否封禁")
+    detection_counts = models.BigIntegerField(default=0, blank=True, null=True, verbose_name="违禁次数", help_text="违禁次数")
+    is_disable = models.BooleanField(default=0, blank=True, null=True, verbose_name="是否封禁", help_text="是否封禁")
     update_time = models.DateTimeField(
         auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
     created_time = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",

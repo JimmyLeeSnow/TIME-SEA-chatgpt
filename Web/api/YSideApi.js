@@ -34,7 +34,7 @@ export function ProhibitedTextDetection(data) {
 /**
  *    违禁状态检测
  */
- export function UserDisable(data) {
+export function UserDisable(data) {
     const params = new URLSearchParams();
 
     Object.keys(data).forEach(key => {

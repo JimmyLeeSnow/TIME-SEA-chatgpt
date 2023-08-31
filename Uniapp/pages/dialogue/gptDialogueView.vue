@@ -1,9 +1,9 @@
 <template>
   <view class="chat-container">
-    <view class="init_container" v-if="chatTemporary.length<=0">
+    <view class="init_container" v-if="chatTemporary.length <= 0">
       <view>
         <view class="bot_logo">
-          <image src="/static/assets/super.svg"/>
+          <image src="/static/assets/super.svg" />
         </view>
         <view class="bot_introduce">
           {{ title }}
@@ -14,7 +14,7 @@
     <view v-else class="animation-fade">
       <scroll-view scroll-y :scrollTop="scrollTop">
         <view class="chat-container" id="scroll-view-content">
-          <view v-for="(item,index) in chatTemporary" :key="index">
+          <view v-for="(item, index) in chatTemporary" :key="index">
             <!--用户-->
             <view class="context-spacing">
               <view class="chat-model-user chat-model slide-animation" @click="copyPersonContext(index)">
@@ -23,7 +23,7 @@
                 </view>
                 <view class="avatar-user avatar">
                   <image
-                      :src="userInfo.avatar?conversionImage(userInfo.avatar): '/static/images/individual/defaultAvatar.jpg'"/>
+                    :src="userInfo.avatar ? conversionImage(userInfo.avatar) : '/static/images/individual/defaultAvatar.jpg'" />
                 </view>
               </view>
             </view>
@@ -31,7 +31,7 @@
               <!--机器人-->
               <view class="chat-model-bot chat-model slide-animation">
                 <view class="avatar-bot avatar">
-                  <image src="/static/assets/super.svg"/>
+                  <image src="/static/assets/super.svg" />
                 </view>
                 <view class="chat-content chat-content-bot">
                   <view v-show="!item.answer">
@@ -44,19 +44,18 @@
                     </view>
                   </view>
                   <mp-html v-show="item.answer" :copy-link="true" :tagStyle="md" :container-style="md" :markdown="true"
-                           :lazy-load="true"
-                           :selectable="true" :content="item.answer"/>
+                    :lazy-load="true" :selectable="true" :content="item.answer" />
                 </view>
 
               </view>
               <view class="slot-btn" v-if="item.isSucceed">
-                <view class="levitation_btn" v-if="item.answer.trim().length>0"
-                      @click="starDialogue(item.question,item.answer,index)">
-                  <van-icon :name="item.starId?'star' :'star-o' " :color="item.starId?'#FFC45F':''"/>
+                <view class="levitation_btn" v-if="item.answer.trim().length > 0"
+                  @click="starDialogue(item.question, item.answer, index)">
+                  <van-icon :name="item.starId ? 'star' : 'star-o'" :color="item.starId ? '#FFC45F' : ''" />
                   ️ {{ item.starId ? '取消收藏' : '收藏' }}
                 </view>
                 <view class="levitation_btn" @click="copyBotContext(index)">
-                  <van-icon name="coupon-o"/>
+                  <van-icon name="coupon-o" />
                   ️ 复制
                 </view>
               </view>
@@ -69,7 +68,7 @@
     <view class="stop_container" v-show="!isNextSend">
       <view class="stop_model">
         <view class="stop_style" @click="closeSocket()">
-          <van-icon name="pause-circle-o"/>
+          <van-icon name="pause-circle-o" />
           <text>暂停输出</text>
         </view>
       </view>
@@ -78,50 +77,47 @@
     <view class="floating" :animation="animationData ? animationData : ''">
       <view class="levitation_btn_container frames" v-show="isNextSend">
         <view class="levitation_btn" @click="clearDialogue">
-          <van-icon name="clock-o"/>
+          <van-icon name="clock-o" />
           ️ 清空屏幕
         </view>
-        <view :class="mode?'mode_btn':'levitation_btn'" @click="mode =!mode">
-          <van-icon name="exchange"/>
+        <view :class="mode ? 'mode_btn' : 'levitation_btn'" @click="mode = !mode">
+          <van-icon name="exchange" />
           ️ {{ mode ? 'MODE-4' : 'MODE-3' }}
         </view>
-        <view class="levitation_btn" @click="isMemoryDisplay=true" >
-          <van-icon name="birthday-cake-o"/>
+        <view class="levitation_btn" @click="isMemoryDisplay = true">
+          <van-icon name="birthday-cake-o" />
           ️ 记忆回溯
         </view>
       </view>
       <view class="input_container">
         <!--输入框-->
         <textarea cursor-spacing="10" id="textarea" :show-confirm-bar="false" :auto-height="true" maxlength="-1"
-                  confirm-type="done"
-                  placeholder-class="placeholder-class"
-                  @confirm="sendMessage($event)" v-model="input" :disabled="!isNextSend"
-                  :placeholder="isNextSend?'有什么问题尽管问我...':'思考中...'"/>
+          confirm-type="done" placeholder-class="placeholder-class" @confirm="sendMessage($event)" v-model="input"
+          :disabled="!isNextSend" :placeholder="isNextSend ? '有什么问题尽管问我...' : '思考中...'" />
         <!-- 提交按钮-->
-        <view :class="isNextSend?'send_btn':'send_btn_active'" @click="sendMessage($event)">
-          <image src="/static/assets/send.svg"/>
+        <view :class="isNextSend ? 'send_btn' : 'send_btn_active'" @click="sendMessage($event)">
+          <image src="/static/assets/send.svg" />
         </view>
       </view>
     </view>
     <!--    记忆回溯-->
-    <van-popup :show="isMemoryDisplay" round="true" close-on-click-overlay="true" @close="closeMemory"
-               closeable>
+    <van-popup :show="isMemoryDisplay" round="true" close-on-click-overlay="true" @close="closeMemory" closeable>
       <view class="memory-container">
         <view class="memory-logo">
-          <image src="/static/assets/super.svg"/>
+          <image src="/static/assets/super.svg" />
         </view>
         <view class="memory-title">
           WOO CLOUD PLUS
         </view>
         <view class="memory-button-model">
           <view class="memory-button" @click="createdNewChat">
-            <van-icon name="comment-o" size="40rpx"/>
+            <van-icon name="comment-o" size="40rpx" />
             <text>创建新的聊天</text>
           </view>
         </view>
         <view class="memory-scroll">
           <scroll-view scroll-y>
-            <view class="memory--row" v-for="(item,index) in dialogueCache.array" :key="index">
+            <view class="memory--row" v-for="(item, index) in dialogueCache.array" :key="index">
               <view class="memory-data">
                 <view class="memory-left" @click="switchChat(index)">
                   <view style="  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #d0d0d0;">
@@ -132,7 +128,7 @@
                   </view>
                 </view>
                 <view class="memory-right" @click="removeChat(index)">
-                  <image :src="dialogueCache.index===index?'/static/assets/selected.svg':'/static/assets/close.svg'"/>
+                  <image :src="dialogueCache.index === index ? '/static/assets/selected.svg' : '/static/assets/close.svg'" />
                 </view>
               </view>
             </view>
@@ -147,10 +143,11 @@
 import md from "@/static/css/md";
 import mpHtml from "@/wxcomponents/mp-html/mp-html.vue";
 import env from "@/utils/env";
-import {getHistory, getToken, getUser, removeChat, removeToken, removeUser, setHistory,} from "@/utils/utils";
-import {deleteStarDialogue, putStarDialogue} from "@/api/user";
-import {conversionImage} from "@/utils/image";
-import {conversionTime} from "@/utils/date";
+import { getHistory, getToken, getUser, removeChat, removeToken, removeUser, setHistory, } from "@/utils/utils";
+import { deleteStarDialogue, putStarDialogue } from "@/api/user";
+import { ProhibitedUserDisable, ProhibitedTextDetection } from "@/api/python";
+import { conversionImage } from "@/utils/image";
+import { conversionTime } from "@/utils/date";
 
 
 export default {
@@ -345,9 +342,35 @@ export default {
       });
     },
     /**
+     * 违禁词检测
+     */
+    textDetection: async function (messages) {
+      try {
+        const res = await ProhibitedTextDetection({ messages: messages });
+        if (res) {
+          if (res.data.code === 2004) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000
+            });
+            return { status: false, message: res.data.msg };
+          }
+        }
+        return { status: true };
+      } catch (e) {
+        uni.showToast({
+          title: '违禁词校验失败，请联系管理员查看原因',
+          icon: 'none',
+          duration: 2000
+        });
+        return { status: false, message: '违禁词校验失败，请联系管理员查看原因' };
+      }
+    },
+    /**
      * 发送消息
      */
-    sendMessage: function () {
+    sendMessage: async function () {
       const _this = this
       //对话中不执行
       if (!this.isNextSend) {
@@ -364,6 +387,32 @@ export default {
         });
         return;
       }
+      // 构造一个字典 同步web端
+      let messages = {
+        'content': verifyInput,
+        'emailAccount': '',
+        'userInfo': JSON.stringify(_this.userInfo)
+      };
+      // 违禁状态检测
+      let statusResult = await ProhibitedUserDisable(messages);
+      if (statusResult.data.code != 2000) {
+        uni.showToast({
+          title: statusResult.data.msg,
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      };
+      // 违禁词检测
+      let textResult = await _this.textDetection(messages);
+      if (!textResult.status) {
+        uni.showToast({
+          title: textResult.message,
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      };
       // 将字符串中的英文转为大写并去除空格 方便校验
       verifyInput = verifyInput.toUpperCase().replace(/\s/g, '');
       // 检验字符串是否包含关键词
@@ -451,7 +500,7 @@ export default {
       });
       //关闭消息
       uni.onSocketClose(function () {
-        uni.setNavigationBarTitle({title: requestInput});
+        uni.setNavigationBarTitle({ title: requestInput });
         //深拷贝防止值转移
         _this.chatTemporary[index].isSucceed = true
         if (_this.chatTemporary[index].answer.trim().length > 0) {
@@ -571,8 +620,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-
 .slide-animation {
   animation: slideEase 0.5s ease-in-out forwards;
 }
@@ -581,6 +628,7 @@ export default {
   0% {
     transform: translateX(-100px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -780,12 +828,14 @@ scroll-view {
 }
 
 @keyframes jump {
+
   0%,
   80%,
   100% {
     transform: scale(0);
     background-color: #F9F9F9;
   }
+
   40% {
     transform: scale(1.0);
     background-color: #5b5cd7;
@@ -827,6 +877,7 @@ scroll-view {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-10px);
   }
@@ -839,8 +890,8 @@ scroll-view {
   animation: fadeIn 0.5s ease-in-out forwards;
 }
 
-.frames{
- animation: fadeIn 0.5s ease-in-out forwards;
+.frames {
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .stop_model {
