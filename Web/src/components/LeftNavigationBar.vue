@@ -40,7 +40,7 @@
         />
         <div class="bottomRight">
           <div class="bottomRightName">WOO CLOUD PLUS</div>
-          <div class="bottomRightEdition">v1.3.1</div>
+          <div class="bottomRightEdition">v1.3.6</div>
         </div>
       </div>
     </div>
@@ -173,6 +173,12 @@ export default defineComponent({
     background-color: transparent;
   }
 }
+
+:deep(.rightContent) {
+  .footer {
+    width: calc(100% - 10px);
+  }
+}
 </style>
 
 <style scoped>
@@ -247,6 +253,17 @@ export default defineComponent({
   /* background: #f6f6f6; */
 }
 
+@media screen and (max-width: 756px) {
+  ::v-deep(.rightContent .body) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  ::v-deep(.rightContent .body .questions > .item) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .loginBut {
   width: 80px;
   height: 40px;
@@ -297,6 +314,7 @@ export default defineComponent({
   .NavigationBar {
     border: none;
     border-radius: 0;
+    overflow: auto;
   }
 
   .leftNavigation {

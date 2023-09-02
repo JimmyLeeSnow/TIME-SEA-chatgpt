@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -27,6 +27,7 @@ VMdEditor.use(vuepressTheme, {
     Prism
 });
 VMdEditor.use(createCopyCodePlugin());
+
 
 let app = createApp(App)
 // v-md-editor
