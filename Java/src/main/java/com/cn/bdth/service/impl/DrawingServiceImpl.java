@@ -289,7 +289,11 @@ public class DrawingServiceImpl implements DrawingService {
                 .select(Drawing::getIsPublic, Drawing::getDrawingId)
                 .orderByDesc(Drawing::getCreatedTime)
         );
-        drawingMapper.updateById(drawing.setIsPublic((drawing.getIsPublic() == 1L ? 0 : 1L)));
+        Long currentIsPublic = drawing.getIsPublic();
+        if (currentIsPublic == null) {
+            currentIsPublic = 0L;
+        }
+        drawingMapper.updateById(drawing.setIsPublic(currentIsPublic == 1L ? 0L : 1L));
     }
 
     @Override

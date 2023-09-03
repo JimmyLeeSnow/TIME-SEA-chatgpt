@@ -31,7 +31,8 @@ class UserTokenCheckView:
             try:
                 # 验证签名是否匹配
                 payload = redis_conn.get('token:login:token:%s' % token).decode()
-            except jwt.InvalidTokenError:
+            except Exception as e:
+                logger.error("redis连接异常错误:%s" % (str(e)))
                 # 如果验证失败，则 token 无效
                 raise ValueError('token校验失败，请不要模拟接口使用')
 

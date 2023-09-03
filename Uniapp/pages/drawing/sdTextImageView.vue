@@ -19,8 +19,8 @@
       <view class="title">
         <view>图片大小</view>
         <scroll-view class="scroll-x" :scroll-with-animation="true" :scroll-bar="false" enable-flex scroll-x>
-          <view :class="item.isSelected ? 'model_choose_selected' : 'model_choose'" v-for="(item, index) in size" :key="index"
-            @click="handleSize(index)">
+          <view :class="item.isSelected ? 'model_choose_selected' : 'model_choose'" v-for="(item, index) in size"
+            :key="index" @click="handleSize(index)">
             {{ item.text }}
           </view>
         </scroll-view>
@@ -128,24 +128,44 @@ export default {
         text: "Euler a"
       },
       {
+        rate: "Restart",
+        isSelected: false,
+        text: "Restart"
+      },
+      {
         rate: "DPM++ SDE Karras",
         isSelected: false,
         text: "SDE Karras"
       },
       {
-        rate: "DPM++ 2S a Karras",
+        rate: "DPM++ 2M SDE Karras",
         isSelected: false,
-        text: "2S a Karras"
+        text: "2M SDE Karras"
       },
       {
-        rate: "DPM++ 2M alt Karras",
+        rate: "DPM++ 2M SDE Exponential",
         isSelected: false,
-        text: "2M alt Karrass"
+        text: "2M SDE Exponential"
       },
       {
-        rate: "DPM++ 2M Karras",
+        rate: "DPM++ 2M SDE Heun Karras",
         isSelected: false,
-        text: "2M Karras"
+        text: "2M SDE Heun Karras"
+      },
+      {
+        rate: "DPM++ 2M SDE Heun Exponential",
+        isSelected: false,
+        text: "2M SDE Heun Exponential"
+      },
+      {
+        rate: "DPM++ 3M SDE Karras",
+        isSelected: false,
+        text: "3M SDE Karras"
+      },
+      {
+        rate: "DPM++ 3M SDE Exponential",
+        isSelected: false,
+        text: "3M SDE Exponential"
       }
       ],
       //迭代步数
@@ -199,7 +219,7 @@ export default {
     /**
      * 违禁词检测
      */
-     textDetection: async function (messages) {
+    textDetection: async function (messages) {
       try {
         const res = await ProhibitedTextDetection({ messages: messages });
         if (res) {
