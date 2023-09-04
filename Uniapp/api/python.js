@@ -27,3 +27,14 @@ export function ProhibitedTextDetection(data) {
         data
     })
 }
+
+/**
+ * sd绘图模型查询
+ */
+ export function StableDiffusionModelSelect(data) {
+    return request({
+        url: '/python/apps/sdmodelselect/',
+        method: 'GET',
+        data
+    })
+}

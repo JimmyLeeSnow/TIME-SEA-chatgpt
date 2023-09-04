@@ -3,7 +3,7 @@ FilePath: models.py
 Author: yun.huang <1594909346@qq.com>
 Date: 2023-08-23 21:58:35
 LastEditors: yun.huang <1594909346@qq.com>
-LastEditTime: 2023-08-30 22:10:57
+LastEditTime: 2023-09-04 14:41:25
 Version: 1.0.1
 Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
 Descripttion: 愿你开心每一天~
@@ -190,6 +190,28 @@ class TextDetection(models.Model):
         verbose_name = '违禁词表'
         verbose_name_plural = verbose_name
         ordering = ('id',)
+
+class StableDiffusionConfig(models.Model):
+    sd_id = models.BigAutoField(primary_key=True, help_text="主键")
+    model_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='模型名称')
+    text_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='展示名称')
+    is_selected = models.BooleanField(default=0, blank=True, null=True, verbose_name="是否默认")
+    update_time = models.DateTimeField(
+        auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
+    created_time = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
+                                           verbose_name="创建时间")
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['created_time'], name='sd_idx_created_time'),
+            models.Index(fields=['update_time'], name='sd_idx_update_time'),
+            models.Index(fields=['sd_id'], name='sd_idx_id'),
+            models.Index(fields=['text_name'], name='sd_idx_text_name')
+        ]
+        db_table = table_prefix + 'sd_config'
+        verbose_name = 'sd绘图表'
+        verbose_name_plural = verbose_name
+        ordering = ('sd_id',)
 
 class OperationLog(CoreModel):
     request_modular = models.CharField(max_length=64, verbose_name="请求模块", null=True, blank=True, help_text="请求模块")

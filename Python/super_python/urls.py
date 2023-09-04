@@ -17,6 +17,7 @@ from django.urls import path,include, re_path
 from django.conf import settings
 
 from system.views import ProhibitedTextDetectionView, UserStatusDisableView
+from apps.picture.views import SdModelSelectView
 
 # 媒体文件流式响应
 from utils.streamingmedia_response import streamingmedia_serve
@@ -28,4 +29,6 @@ urlpatterns = [
     path('python/system/textdetection/', ProhibitedTextDetectionView.as_view(), name='违禁词检测'),
     # 违禁状态检测
     path('python/system/userdisable/', UserStatusDisableView.as_view(), name='违禁状态检测'),
+    # sd模型查询
+    path('python/apps/sdmodelselect/', SdModelSelectView.as_view(), name='sd模型查询'),
 ]

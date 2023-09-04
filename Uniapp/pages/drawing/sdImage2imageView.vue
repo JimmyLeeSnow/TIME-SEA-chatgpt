@@ -39,19 +39,24 @@
       </view>
       <!--  描述词-->
       <view class="title">
-        <view>正向提示词(必填)</view>
+        <view class="title-row">
+          <view class="lable-prompt">正向提示词</view>
+          <button class="random-prompt" @click="randomForward">随机</button>
+          <button class="clear-prompt" @click="clearForward">清空</button>
+        </view>
         <textarea :show-confirm-bar="false" :auto-height="true" maxlength="2000" confirm-type="done" v-model="form.prompt"
-          placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇">
-
-      </textarea>
+          placeholder-class="placeholder-class" @input="formVal = form.prompt.replace(promptData.key, promptData.val)"
+          placeholder="请输入绘画描述词汇" />
       </view>
       <!--  描述词-->
       <view class="title">
-        <view>反向提示词(可选)</view>
+        <view class="title-row">
+          <view class="lable-prompt">反向提示词(可选)</view>
+          <button class="random-prompt" @click="randomReverse">随机</button>
+          <button class="clear-prompt" @click="clearReverse">清空</button>
+        </view>
         <textarea :show-confirm-bar="false" :auto-height="true" maxlength="2000" confirm-type="done"
-          v-model="form.negative_prompt" placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇">
-
-      </textarea>
+          v-model="form.negative_prompt" placeholder-class="placeholder-class" placeholder="请输入绘画描述词汇" />
       </view>
       <!--  参数配置-->
       <view class="title">
@@ -88,9 +93,9 @@
             <view class="item-row" v-for="(_, rowIndex) in Array(Math.ceil(model.length / 3))" :key="rowIndex">
               <view v-for="(_, colIndex) in Array(3)" :key="colIndex">
                 <view v-if="model[rowIndex * 3 + colIndex]"
-                  :class="model[rowIndex * 3 + colIndex].isSelected ? 'model_choose_selected' : 'model_choose'"
+                  :class="model[rowIndex * 3 + colIndex].is_selected ? 'model_choose_selected' : 'model_choose'"
                   @click="handleModel(rowIndex * 3 + colIndex)">
-                  {{ model[rowIndex * 3 + colIndex].text }}
+                  {{ model[rowIndex * 3 + colIndex].text_name }}
                 </view>
               </view>
             </view>
@@ -107,9 +112,10 @@
 <script>
 import GenerateLoadingComponent from "@/pages/drawing/components/generateLoadingComponent.vue";
 import LoadingComponent from "@/wxcomponents/components/loadingComponent.vue";
-import { ProhibitedUserDisable, ProhibitedTextDetection } from "@/api/python";
+import { ProhibitedUserDisable, ProhibitedTextDetection, StableDiffusionModelSelect } from "@/api/python";
 import { isDrawingSucceed, sdConnectivity } from "@/api/drawing";
 import env from "@/utils/env";
+import prompt from "@/utils/prompt";
 import { getToken } from "@/utils/utils";
 
 export default {
@@ -129,6 +135,8 @@ export default {
         location: 0,
         negative_prompt: ''
       },
+      // 英文提示词
+      promptEnglish: '',
       msg: '正在检查绘图服务运行状态',
       //图片大小
       size: [{
@@ -234,13 +242,20 @@ export default {
       ]
     };
   },
-  created() {
-    this.model = env.sdModels
-    this.model.forEach(m => {
-      if (m.isSelected) {
-        this.form.modelName = m.modelName
+  created: async function () {
+    try {
+      const res = await this.sdModelSelect();
+      if (res.status == true) {
+        this.model = res.data;
+        this.model.forEach(m => {
+          if (m.is_selected) {
+            this.form.modelName = m.model_name;
+          }
+        });
       }
-    })
+    } catch (e) {
+      console.error(e);
+    }
   },
   methods: {
     /**
@@ -266,9 +281,9 @@ export default {
      * @param index
      */
     handleModel: function (index) {
-      this.model.forEach(s => s.isSelected = false)
-      this.model[index].isSelected = true
-      this.form.modelName = this.model[index].modelName
+      this.model.forEach(s => s.is_selected = false)
+      this.model[index].is_selected = true
+      this.form.modelName = this.model[index].model_name
     },
     beforeRead: function (e) {
       const { file, callback } = e.detail;
@@ -386,6 +401,60 @@ export default {
       }
     },
     /**
+     * sd绘图模型查询
+     */
+    sdModelSelect: async function () {
+      try {
+        const res = await StableDiffusionModelSelect();
+        if (res) {
+          return { status: true, data: res };
+        }
+      } catch (e) {
+        uni.showToast({
+          title: 'sd绘图模型查询失败，请联系管理员查看原因',
+          icon: 'none',
+          duration: 2000
+        });
+        return { status: false, message: 'sd绘图模型查询失败，请联系管理员查看原因' };
+      }
+    },
+    /**
+     * 正向随机提示词
+     */
+    randomForward: function () {
+      const _this = this
+      // 首先，从 prompt 中随机选择一条数据
+      const randomItem = prompt.promptForward[Math.floor(Math.random() * prompt.promptForward.length)];
+      // 将 key 和 val 内容分别赋值给相应变量
+      _this.form.prompt = randomItem.key;
+      _this.promptEnglish = randomItem.val;
+    },
+    /**
+     * 反向随机提示词
+     */
+    randomReverse: function () {
+      const _this = this
+      // 首先，从 prompt 中随机选择一条数据
+      const randomItem = prompt.promptReverse[Math.floor(Math.random() * prompt.promptReverse.length)];
+      // 将 key 和 val 内容分别赋值给相应变量
+      _this.form.negative_prompt = randomItem.key;
+      _this.promptEnglish = randomItem.val;
+    },
+    /**
+     * 清空正向提示词
+     */
+    clearForward: function () {
+      const _this = this
+      _this.form.prompt = '';
+    },
+    /**
+     * 清空反向提示词
+     */
+    clearReverse: function () {
+      const _this = this
+      _this.form.negative_prompt = '';
+    },
+    /**
      * 提交
      */
     submit: async function () {
@@ -397,6 +466,10 @@ export default {
           duration: 4000
         })
         return
+      }
+      // 判断this.promptEnglish是否有值 有值的话替换
+      if (this.promptEnglish) {
+        this.form.prompt = this.promptEnglish;
       }
       if (!prompt) {
         uni.showToast({
@@ -569,6 +642,43 @@ export default {
 .title {
   padding-top: 30rpx;
   font-size: 28rpx
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+}
+
+.lable-prompt {
+  width: 300rpx;
+}
+
+.random-prompt {
+  background-color: rgb(138, 117, 255);
+  color: #ffffff;
+  font-size: 25rpx;
+  border: none;
+  border-radius: 10px;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  height: 60rpx;
+  margin-right: -120rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.clear-prompt {
+  background-color: rgb(138, 117, 255);
+  color: #ffffff;
+  font-size: 25rpx;
+  border: none;
+  border-radius: 10px;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+  justify-content: center;
+  align-items: center;
 }
 
 .model_choose,
