@@ -3,7 +3,7 @@ FilePath: models.py
 Author: yun.huang <1594909346@qq.com>
 Date: 2023-08-23 21:58:35
 LastEditors: yun.huang <1594909346@qq.com>
-LastEditTime: 2023-09-04 14:41:25
+LastEditTime: 2023-09-05 18:21:58
 Version: 1.0.1
 Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
 Descripttion: 愿你开心每一天~
@@ -212,6 +212,34 @@ class StableDiffusionConfig(models.Model):
         verbose_name = 'sd绘图表'
         verbose_name_plural = verbose_name
         ordering = ('sd_id',)
+
+class Personality(models.Model):
+    personality_id = models.BigAutoField(primary_key=True, verbose_name="主键ID")
+    user_id = models.BigIntegerField(verbose_name='所属用户')
+    model = models.CharField(max_length=50, blank=True, null=True, verbose_name="模型名称")
+    top_p = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name="未知")
+    max_tokens = models.BigIntegerField(blank=True, null=True, verbose_name="最大token数")
+    temperature = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name="温度")
+    open_key = models.CharField(max_length=255, blank=True, null=True, verbose_name="chatgpt密钥")
+    open_ai_url = models.CharField(max_length=255, blank=True, null=True, verbose_name="chatgpt请求地址")
+    questions = models.TextField(blank=True, null=True, verbose_name="问题")
+    answer = models.TextField(blank=True, null=True, verbose_name="回答")
+    speed = models.BigIntegerField(blank=True, null=True, verbose_name="回复速率")
+    update_time = models.DateTimeField(
+        auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
+    created_time = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
+                                           verbose_name="创建时间")
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['created_time'], name='per_idx_created_time'),
+            models.Index(fields=['update_time'], name='per_idx_update_time'),
+            models.Index(fields=['personality_id'], name='per_idx_personality_id')
+        ]
+        db_table = "personality"
+        verbose_name="特殊配置表"
+        verbose_name_plural = verbose_name
+        ordering = ('personality_id',)
 
 class OperationLog(CoreModel):
     request_modular = models.CharField(max_length=64, verbose_name="请求模块", null=True, blank=True, help_text="请求模块")

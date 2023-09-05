@@ -3,7 +3,7 @@ server:
 sa-token:
   token-name: token
   timeout: 43200
-  activity-timeout: 43200
+  active-timeout: 43200
   is-concurrent: true
   is-share: false
   is-log: false
