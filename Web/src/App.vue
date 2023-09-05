@@ -16,8 +16,6 @@
   <div id="footer">
     2023 - 2023 © 佑云<a href="https://chat.yycld.com" target="_blank" rel="noopener noreferrer"
       style="color: inherit; text-decoration: none; margin-right: 16px; margin-left: 10px;">WOO CLOUD PLUS</a>
-    <span id="htmer_time">该网站已运行 <span id="days"></span>天<span id="hours"></span>时<span id="minutes"></span>分<span
-        id="seconds"></span>秒</span><br />
   </div>
 </template>
 
@@ -34,61 +32,6 @@ export default {
   setup() {
     let store = useStore();
     store.commit("initState");
-
-    // 网站运行时间显示
-    function secondToDate(second) {
-      if (!second || second < 0) {
-        return [0, 0, 0, 0];
-      }
-
-      var time = [];
-
-      var days = Math.floor(second / (24 * 3600));
-      time.push(days);
-
-      second %= 24 * 3600;
-      var hours = Math.floor(second / 3600);
-      time.push(hours);
-
-      second %= 3600;
-      var minutes = Math.floor(second / 60);
-      time.push(minutes);
-
-      var seconds = second % 60;
-      time.push(seconds);
-
-      return time;
-    }
-
-    function updateClock() {
-      var create_time = Math.round(new Date("2023-05-28T00:00:00Z").getTime() / 1000);
-      var current_time = Math.round(new Date().getTime() / 1000);
-      var currentTime = secondToDate(current_time - create_time);
-
-      var daysElement = document.getElementById("days");
-      var hoursElement = document.getElementById("hours");
-      var minutesElement = document.getElementById("minutes");
-      var secondsElement = document.getElementById("seconds");
-
-      if (
-        daysElement !== null &&
-        hoursElement !== null &&
-        minutesElement !== null &&
-        secondsElement !== null
-      ) {
-        daysElement.textContent = currentTime[0];
-        hoursElement.textContent = currentTime[1];
-        minutesElement.textContent = currentTime[2];
-        secondsElement.textContent = currentTime[3];
-        daysElement.style.color = "#409eff";
-        hoursElement.style.color = "#409eff";
-        minutesElement.style.color = "#409eff";
-        secondsElement.style.color = "#409eff";
-      }
-    }
-
-    // 每秒刷新一次
-    setInterval(updateClock, 1000);
 
     const dialogVisible = ref(false);
     const context = ref("");
@@ -129,13 +72,6 @@ export default {
       context,
     };
   },
-  mounted() {
-    const script = document.createElement('script');
-    script.id = 'LA-DATA-WIDGET';
-    script.crossOrigin = 'anonymous';
-    script.src = 'https://v6-widget.51.la/v6/K4zEC7JJ8vWtJdWg/quote.js?theme=#1690FF,#666666,#999999,#FFFFFF,#FFFFFF,#1690FF,12&f=12';
-    document.getElementById('footer').appendChild(script);
-  }
 };
 // 此内容未经授权不能删除
 // eslint-disable-next-line no-console

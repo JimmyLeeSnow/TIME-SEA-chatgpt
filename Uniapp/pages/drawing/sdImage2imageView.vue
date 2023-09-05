@@ -135,8 +135,10 @@ export default {
         location: 0,
         negative_prompt: ''
       },
-      // 英文提示词
-      promptEnglish: '',
+      // 正向英文提示词
+      prompForwardEnglish: '',
+      // 反向英文提示词
+      prompReverseEnglish: '',
       msg: '正在检查绘图服务运行状态',
       //图片大小
       size: [{
@@ -427,7 +429,7 @@ export default {
       const randomItem = prompt.promptForward[Math.floor(Math.random() * prompt.promptForward.length)];
       // 将 key 和 val 内容分别赋值给相应变量
       _this.form.prompt = randomItem.key;
-      _this.promptEnglish = randomItem.val;
+      _this.prompForwardEnglish = randomItem.val;
     },
     /**
      * 反向随机提示词
@@ -438,7 +440,7 @@ export default {
       const randomItem = prompt.promptReverse[Math.floor(Math.random() * prompt.promptReverse.length)];
       // 将 key 和 val 内容分别赋值给相应变量
       _this.form.negative_prompt = randomItem.key;
-      _this.promptEnglish = randomItem.val;
+      _this.prompReverseEnglish = randomItem.val;
     },
     /**
      * 清空正向提示词
@@ -467,9 +469,13 @@ export default {
         })
         return
       }
-      // 判断this.promptEnglish是否有值 有值的话替换
-      if (this.promptEnglish) {
-        this.form.prompt = this.promptEnglish;
+      // 判断this.prompForwardEnglish是否有值 有值的话替换
+      if (this.prompForwardEnglish) {
+        this.form.prompt = this.prompForwardEnglish;
+      }
+      // 判断this.prompReverseEnglish是否有值 有值的话替换
+      if (this.prompReverseEnglish) {
+        this.form.negative_prompt = this.prompReverseEnglish;
       }
       if (!prompt) {
         uni.showToast({

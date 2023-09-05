@@ -60,7 +60,7 @@ class UserStatusDisableView(APIView):
             
             try:
                 user_exists = Users.objects.filter(filter_condition).exists()
-                
+
                 if user_exists:
                     is_disable = Users.objects.filter(filter_condition).values('is_disable').first()
                     if is_disable['is_disable']:

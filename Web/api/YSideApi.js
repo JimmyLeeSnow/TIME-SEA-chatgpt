@@ -3,7 +3,7 @@
  * @Author: yun.huang <1594909346@qq.com>
  * @Date: 2023-08-30 10:03:45
  * @LastEditors: yun.huang <1594909346@qq.com>
- * @LastEditTime: 2023-08-30 10:03:46
+ * @LastEditTime: 2023-09-05 14:19:15
  * @Version: 1.0.1
  * Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
  * @Descripttion: 愿你开心每一天~
@@ -45,4 +45,25 @@ export function UserDisable(data) {
         url: '/python/system/userdisable/?' + params.toString(),
         method: 'GET'
     });
+}
+
+/**
+ *    sd绘图模型查询
+ */
+export function StableDiffusionModelSelect(a, b) {
+    return request({
+        url: '/python/apps/sdmodelselect/?pageNum=' + a + '&prompt=' + b,
+        method: 'GET'
+    })
+}
+
+/**
+ *    sd绘图增删改
+ */
+export function StableDiffusionModelCurd(data) {
+    return request({
+        url: '/python/apps/sdmodelcurd/',
+        method: 'POST',
+        data
+    })
 }

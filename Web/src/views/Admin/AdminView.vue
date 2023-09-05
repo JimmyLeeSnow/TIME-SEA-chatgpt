@@ -23,6 +23,9 @@
         <el-tab-pane label="终端控制" name="sixth">
           <control-panel-view />
         </el-tab-pane>
+        <el-tab-pane label="SD绘图配置" name="seventh">
+          <sd-panel-view />
+        </el-tab-pane>
       </el-tabs>
       <div v-else class="no_data">
         <ViewState class="state" Type="error" ErrorText="当前页面不见了" />
@@ -41,10 +44,12 @@ import ProductView from "@/views/Admin/components/ProductView.vue";
 import OrdersDataView from "@/views/Admin/components/OrdersDataView.vue";
 import ViewState from "@/components/ViewState.vue";
 import ControlPanelView from "@/views/Admin/components/ControlPanelView.vue";
+import SdPanelView from "@/views/Admin/components/SdPanelView.vue";
 
 export default {
   name: "PromptList",
   components: {
+    SdPanelView,
     ControlPanelView,
     ViewState,
     OrdersDataView,
