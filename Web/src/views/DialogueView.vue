@@ -20,6 +20,14 @@
         <div class="question">
           <div>
             <div class="text">{{ item.user }}</div>
+            <div class="operation--model_user" v-if="!item.isError">
+              <div class="op-btn" @click="copyAnswer(item.user)">
+                <el-icon>
+                  <CopyDocument />
+                </el-icon>
+                <text class="op-font">复制</text>
+              </div>
+            </div>
           </div>
           <el-avatar
             class="flexShrink"
@@ -261,6 +269,7 @@ export default {
     const dialogueCache = ref({});
     const dialogueWidth = ref("30%");
     const rate = ref(50);
+    const memory = ref(-10)
 
     /**
      * 违禁词检测
@@ -293,6 +302,7 @@ export default {
       //获取图片域名
       imageUrl.value = process.env.VUE_APP_IMAGE;
       rate.value = parseInt(process.env.VUE_APP_RATE);
+      memory.value = parseInt(process.env.VUE_APP_MEMORY);
       //获取对话缓存数据
       let item = localStorage.getItem("dialogueCache");
       if (store.getters.userinfo) {
@@ -476,7 +486,7 @@ export default {
       // TODO 上下文
       let messages = [];
       conversationList.value
-        .slice(-10)
+        .slice(memory.value)
         .forEach(({ isError, user, assistant }) => {
           if (!isError) {
             messages.push({
@@ -924,6 +934,15 @@ export default {
   margin-left: 10px;
 }
 
+.operation--model_user {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-right: 5px;
+
+}
+
 .op-btn {
   box-shadow: 0 5px 7px rgb(0 0 0 / 6%);
   color: #c8c8c8;
@@ -1022,7 +1041,7 @@ export default {
 }
 
 :deep(.answer > .el-avatar, .question > .el-avatar) {
-  background-color: white;
+  background-color: rgb(38,42,44);
 }
 
 .clear {
@@ -1211,4 +1230,5 @@ export default {
     background-color: rgb(186, 156, 241);
   }
 }
+
 </style>

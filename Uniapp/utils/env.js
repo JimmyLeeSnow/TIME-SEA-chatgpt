@@ -12,17 +12,17 @@ export default {
     // 默认作者名
     author: '佑云',
     // HTTP请求 基类
-    baseUrl: 'https://XXXXXX:8625',
+    baseUrl: 'https://后端服务器域名:8625',
     // PYTHON请求 基类
-    pythonUrl: 'https://XXXXXX:8626',
+    pythonUrl: 'https://后端服务器域名:8626',
     // 长连接请求 基类
-    baseWs: 'wss://XXXXXX:8625',
+    baseWs: 'wss://后端服务器域名:8625',
     // 图片服务器域名
-    imageBaseUrl: 'https://XXXXX',
+    imageBaseUrl: 'https://图片服务器域名',
     // 过滤用户输入关键词 (英文则大写) (初步校验 后端也会做校验)
     filtration: ["GPT", "OPENAI", "引擎"],
     // BOT最大记忆
-    memory: 50,
+    memory: -50,
     // 每条历史词汇最大长度,
     contextLength: 5000,
     //BOT 初始化词汇 每次打开将随机抽取一条作为显示信息

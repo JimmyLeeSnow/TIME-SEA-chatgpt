@@ -13,5 +13,5 @@ public interface WeChatConstant {
 
 
 
-    String RC_MODE ="(WOO CLOUD)";
+    String RC_MODE =" started ";
 }
