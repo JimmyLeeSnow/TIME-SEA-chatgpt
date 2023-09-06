@@ -10,12 +10,12 @@ spring:
     # redis配置
     redis:
       database: 1
-      host: 127.0.0.1
+      host: super-redis
       port: 6379
       password: ''
   # mysql配置
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/super_bot?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true&useSSL=true
+    url: jdbc:mysql://super-python:3306/super_bot?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true&useSSL=true
     username: root
     password: 123
   # 邮箱

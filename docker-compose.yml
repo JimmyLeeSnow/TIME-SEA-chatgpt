@@ -1,0 +1,150 @@
+#
+# FilePath: docker-compose.yml
+# Author: yun.huang <1594909346@qq.com>
+# Date: 2023-09-6 11:47:28
+# LastEditors: yun.huang <1594909346@qq.com>
+# LastEditTime: 2023-09-6 11:47:28
+# Version: 1.0.1
+# Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
+# Descripttion: 愿你开心每一天~
+#
+version: "3"
+services:
+  super-mysql:
+    image: mysql:8.0.34
+    restart: always
+    container_name: super-mysql
+    hostname: super-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      TZ: Asia/Shanghai
+    ports:
+      - 3306:3306
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1g'
+    volumes:
+      - /data/mysql/data:/var/lib/mysql
+      - /data/mysql/conf/my.conf:/etc/mysql/my.cnf
+    command:
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+    networks:
+      super:
+        ipv4_address: 192.168.1.10
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent 192.168.1.10:3306 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+  super-redis:
+    image: redis:6.0.16-bullseye
+    restart: always
+    container_name: super-redis
+    hostname: super-redis
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1g'
+    volumes:
+      - /data/redis/data:/data
+      - /data/redis/conf/redis.conf:/etc/redis/redis.conf
+    command:
+      /bin/sh -c "redis-server /etc/redis/redis.conf --appendonly yes"
+    networks:
+      super:
+        ipv4_address: 192.168.1.11
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent 192.168.1.11:6379 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+  super-python:
+    build:
+      context: ./Python
+    image: super-python:1.0.1
+    restart: always
+    container_name: super-python
+    hostname: super-python
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8626:8626"
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1g'
+    volumes:
+      - /data/python/data:/app
+    networks:
+      super:
+        ipv4_address: 192.168.1.12
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent 192.168.1.12:8626 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    super-java:
+      build:
+        context: ./Java
+      image: super-java:1.0.1
+      restart: always
+      container_name: super-java
+      hostname: super-java
+      environment:
+        TZ: Asia/Shanghai
+      ports:
+        - "8625:8625"
+      logging:
+        driver: 'json-file'
+        options:
+          max-size: '1g'
+      volumes:
+        - /data/java/data:/app
+      networks:
+        super:
+          ipv4_address: 192.168.1.13
+      healthcheck:
+        test: ["CMD-SHELL", "curl --silent 192.168.1.13:8625 >/dev/null || exit 1"]
+        interval: 10s
+        timeout: 10s
+        retries: 3
+    super-web:
+      build:
+        context: ./Web
+      image: super-web:1.0.1
+      restart: always
+      container_name: super-web
+      hostname: super-web
+      environment:
+        TZ: Asia/Shanghai
+      ports:
+        - "80:80"
+        - "443:443"
+      logging:
+        driver: 'json-file'
+        options:
+          max-size: '1g'
+      volumes:
+        - /data/web/data:/usr/share/nginx/html/super_web
+      networks:
+        super:
+          ipv4_address: 192.168.1.14
+      healthcheck:
+        test: ["CMD-SHELL", "curl --silent 192.168.1.14:443 >/dev/null || exit 1"]
+        interval: 10s
+        timeout: 10s
+        retries: 3
+
+networks:
+  super:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.1.0/24"

@@ -17,7 +17,7 @@ from super_python.settings import BASE_DIR
 # 数据库地址
 DATABASE_ENGINE = "django.db.backends.mysql"
 # 数据库地址
-DATABASE_HOST = "127.0.0.1"
+DATABASE_HOST = "super-mysql"
 # 数据库端口
 DATABASE_PORT = 3306
 # 数据库用户名
@@ -37,7 +37,7 @@ DATABASE_CONN_MAX_AGE = 120
 # ================================================= #
 
 REDIS_PASSWORD = 'redis'
-REDIS_HOST = '127.0.0.1'
+REDIS_HOST = 'super-redis'
 REDIS_PORT = '6379'
 REDIS_URL = f'redis://:{REDIS_PASSWORD or ""}@{REDIS_HOST}:{REDIS_PORT}'
 
