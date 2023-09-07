@@ -3,7 +3,7 @@
  # @Author: yun.huang <1594909346@qq.com>
  # @Date: 2023-09-06 20:11:16
  # @LastEditors: yun.huang <1594909346@qq.com>
- # @LastEditTime: 2023-09-06 20:30:58
+ # @LastEditTime: 2023-09-07 10:26:35
  # @Version: 1.0.1
  # Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
  # @Descripttion: 愿你开心每一天~
@@ -66,7 +66,7 @@ centos_init (){
     # 开启Docker服务
     service docker start
     echo -e "\033[44;37m  开始安装docker-compose...  \033[0m"
-    curl -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-x86_64
+    cp docker-compose /usr/local/bin/docker-compose
     # 增加权限
     chmod +x /usr/local/bin/docker-compose
     echo -e "\033[44;37m  初始化完成...  \033[0m"
@@ -93,7 +93,7 @@ ubuntu_init (){
     # 开启Docker服务
     service docker start
     echo -e "\033[44;37m  开始安装docker-compose...  \033[0m"
-    curl -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-x86_64
+    cp docker-compose /usr/local/bin/docker-compose
     # 增加权限
     chmod +x /usr/local/bin/docker-compose
     echo -e "\033[44;37m  初始化完成...  \033[0m"
