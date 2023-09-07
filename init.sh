@@ -101,6 +101,13 @@ ubuntu_init (){
 
 one_deployment (){
     echo -e "\033[44;37m  开始一键部署...  \033[0m"
+    mkdir -p /data/mysql/data
+    mkdir -p /data/redis/data
+    mkdir -p /data/python/data
+    mkdir -p /data/java/data
+    mkdir -p /data/web/data
     docker-compose up
     echo -e "\033[44;37m  部署完成...  \033[0m"
 }
+
+youchatai

@@ -16,6 +16,7 @@ services:
     container_name: super-mysql
     hostname: super-mysql
     environment:
+      # 数据库密码
       MYSQL_ROOT_PASSWORD: 123456
       TZ: Asia/Shanghai
     ports:
@@ -26,7 +27,7 @@ services:
         max-size: '1g'
     volumes:
       - /data/mysql/data:/var/lib/mysql
-      - /data/mysql/conf/my.conf:/etc/mysql/my.cnf
+      - ./my.conf:/etc/mysql/my.cnf
     command:
       --max_connections=1000
       --character-set-server=utf8mb4
@@ -54,7 +55,7 @@ services:
         max-size: '1g'
     volumes:
       - /data/redis/data:/data
-      - /data/redis/conf/redis.conf:/etc/redis/redis.conf
+      - ./redis.conf:/etc/redis/redis.conf
     command:
       /bin/sh -c "redis-server /etc/redis/redis.conf --appendonly yes"
     networks:

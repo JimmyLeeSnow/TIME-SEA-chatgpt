@@ -67,6 +67,24 @@ https://chat.yycld.com/
 - 查看广告获得次数
 - 发布公告(双端同步)
 
+## 一键部署
+`一定一定先把各端配置文件修改完成`
+- java项目 修改src/resources/application-prod.yml文件
+- java项目 src/resources/目录放置pfx证书文件
+- python项目 根目录config_example.py重命名为config.py并修改里面的配置
+- python项目 super_python目录settings_example.py重命名为settings.py并修改里面的配置
+- web项目 修改.env.production配置文件
+- web项目 替换crt文件夹中的证书密钥
+- web项目 修改super_web.conf里的域名
+- 项目根目录 修改docker-compose.yml文件第20行数据库密码
+- 项目根目录 修改redis.conf文件第790行redis密码
+```
+# 第一步，初始化环境
+sh init.sh # 根据系统选择1或者是2
+# 第二步，部署
+sh init.sh # 选择3
+```
+
 ## 部署环境
 
 `百度翻译`
