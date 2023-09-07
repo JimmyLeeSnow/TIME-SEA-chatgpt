@@ -31,4 +31,4 @@ COPY . .
 
 EXPOSE 8626
 
-CMD [ "python3", "manage.py", "runsslserver", "--certificate", "./server.pem", "./server.key", "0.0.0.0:8626" ]
+CMD [ "python3", "manage.py", "makemigrations", "&&", "python3", "manage.py", "migrate" ]
