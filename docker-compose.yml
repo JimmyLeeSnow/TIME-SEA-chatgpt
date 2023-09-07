@@ -28,20 +28,24 @@ services:
     volumes:
       - /data/mysql/data:/var/lib/mysql
       - ./my.conf:/etc/mysql/my.cnf
-    command:
-      --max_connections=1000
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_general_ci
+    command: --max_connections=1000 --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     networks:
       super:
         ipv4_address: 192.168.1.10
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent 192.168.1.10:3306 >/dev/null || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent 192.168.1.10:3306 >/dev/null || exit 1"
+        ]
       interval: 10s
       timeout: 10s
       retries: 3
   super-redis:
     image: redis:6.0.16-bullseye
+    depends_on:
+      super-mysql:
+        condition: service_healthy
     restart: always
     container_name: super-redis
     hostname: super-redis
@@ -56,13 +60,16 @@ services:
     volumes:
       - /data/redis/data:/data
       - ./redis.conf:/etc/redis/redis.conf
-    command:
-      /bin/sh -c "redis-server /etc/redis/redis.conf --appendonly yes"
+    command: /bin/sh -c "sysctl vm.overcommit_memory=1 && echo madvise > /sys/kernel/mm/transparent_hugepage/enabled && redis-server /etc/redis/redis.conf --appendonly yes"
     networks:
       super:
         ipv4_address: 192.168.1.11
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent 192.168.1.11:6379 >/dev/null || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent 192.168.1.11:6379 >/dev/null || exit 1"
+        ]
       interval: 10s
       timeout: 10s
       retries: 3
@@ -70,6 +77,9 @@ services:
     build:
       context: ./Python
     image: super-python:1.0.1
+    depends_on:
+      super-redis:
+        condition: service_healthy
     restart: always
     container_name: super-python
     hostname: super-python
@@ -83,67 +93,85 @@ services:
         max-size: '1g'
     volumes:
       - /data/python/data:/app
-    command:
-      /bin/sh -c "python3 manage.py makemigrations && python3 manage.py migrate"
+    command: /bin/sh -c "python3 manage.py makemigrations && python3 manage.py migrate"
     networks:
       super:
         ipv4_address: 192.168.1.12
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent 192.168.1.12:8626 >/dev/null || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent 192.168.1.12:8626 >/dev/null || exit 1"
+        ]
       interval: 10s
       timeout: 10s
       retries: 3
-    super-java:
-      build:
-        context: ./Java
-      image: super-java:1.0.1
-      restart: always
-      container_name: super-java
-      hostname: super-java
-      environment:
-        TZ: Asia/Shanghai
-      ports:
-        - "8625:8625"
-      logging:
-        driver: 'json-file'
-        options:
-          max-size: '1g'
-      volumes:
-        - /data/java/data:/app
-      networks:
-        super:
-          ipv4_address: 192.168.1.13
-      healthcheck:
-        test: ["CMD-SHELL", "curl --silent 192.168.1.13:8625 >/dev/null || exit 1"]
-        interval: 10s
-        timeout: 10s
-        retries: 3
-    super-web:
-      build:
-        context: ./Web
-      image: super-web:1.0.1
-      restart: always
-      container_name: super-web
-      hostname: super-web
-      environment:
-        TZ: Asia/Shanghai
-      ports:
-        - "80:80"
-        - "443:443"
-      logging:
-        driver: 'json-file'
-        options:
-          max-size: '1g'
-      volumes:
-        - /data/web/data:/usr/share/nginx/html/super_web
-      networks:
-        super:
-          ipv4_address: 192.168.1.14
-      healthcheck:
-        test: ["CMD-SHELL", "curl --silent 192.168.1.14:443 >/dev/null || exit 1"]
-        interval: 10s
-        timeout: 10s
-        retries: 3
+  super-java:
+    build:
+      context: ./Java
+    image: super-java:1.0.1
+    depends_on:
+      super-python:
+        condition: service_healthy
+    restart: always
+    container_name: super-java
+    hostname: super-java
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8625:8625"
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1g'
+    volumes:
+      - /data/java/data:/app
+    command: /bin/sh -c "java -jar /app/BDTH-SUPER-0.0.1-SNAPSHOT.jar"
+    networks:
+      super:
+        ipv4_address: 192.168.1.13
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent 192.168.1.13:8625 >/dev/null || exit 1"
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+  super-web:
+    build:
+      context: ./Web
+    image: super-web:1.0.1
+    depends_on:
+      super-java:
+        condition: service_healthy
+    restart: always
+    container_name: super-web
+    hostname: super-web
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "80:80"
+      - "443:443"
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1g'
+    volumes:
+      - /data/web/data:/usr/share/nginx/html/super_web
+    networks:
+      super:
+        ipv4_address: 192.168.1.14
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent 192.168.1.14:443 >/dev/null || exit 1"
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
 
 networks:
   super:

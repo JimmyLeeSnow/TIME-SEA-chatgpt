@@ -3,7 +3,7 @@
  # @Author: yun.huang <1594909346@qq.com>
  # @Date: 2023-09-06 20:11:16
  # @LastEditors: yun.huang <1594909346@qq.com>
- # @LastEditTime: 2023-09-07 10:26:35
+ # @LastEditTime: 2023-09-07 11:38:41
  # @Version: 1.0.1
  # Copyright: 2023 YunYou Innovation Technology Co., Ltd. All Rights Reserved.
  # @Descripttion: 愿你开心每一天~
@@ -106,7 +106,7 @@ one_deployment (){
     mkdir -p /data/python/data
     mkdir -p /data/java/data
     mkdir -p /data/web/data
-    docker-compose up
+    docker-compose up -d
     echo -e "\033[44;37m  部署完成...  \033[0m"
 }
 

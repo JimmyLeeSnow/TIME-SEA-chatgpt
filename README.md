@@ -73,6 +73,7 @@ https://chat.yycld.com/
 - java项目 src/resources/目录放置pfx证书文件
 - python项目 根目录config_example.py重命名为config.py并修改里面的配置
 - python项目 super_python目录settings_example.py重命名为settings.py并修改里面的配置
+- python项目 根目录放置后端的证书，注意是后端的证书
 - web项目 修改.env.production配置文件
 - web项目 替换crt文件夹中的证书密钥
 - web项目 修改super_web.conf里的域名

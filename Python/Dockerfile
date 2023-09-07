@@ -23,15 +23,11 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.ori \
 COPY requirements.txt /tmp/requirements.txt
 
 RUN pip install --no-cache-dir -r /tmp/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    && rm -rf /tmp/requirements.txt \
-    && useradd -U app_user \
-    && install -d -m 0755 -o app_user -g app_user /app/static
+    && rm -rf /tmp/requirements.txt 
 
 WORKDIR /app
 
-USER app_user:app_user
-
-COPY --chown=app_user:app_user . .
+COPY . .
 
 EXPOSE 8626
 
